@@ -4,9 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "postinstall": "git config core.hooksPath ./git-hooks",
     "serve": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint:ts": "eslint . --ext .ts --ext .tsx",
+    "lint:ts:fix": "eslint . --ext .ts --ext .tsx --fix",
+    "lint:ts:watch": "esw . --watch --ext .ts --ext .tsx ",
+    "prettyprint": "prettier --check .",
+    "prettyprint:fix": "prettier --write ."
   },
   "dependencies": {
     "react": "^18.2.0",

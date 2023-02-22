@@ -1,0 +1,98 @@
+#!/bin/bash
+RED="\033[1;31m"
+GREEN="\033[1;32m"
+NC="\033[0m"
+
+function remove_last_char_if_not_empty() {
+	container=("$@")
+	if [[ -n "$container" ]]
+	then
+		container=${container::-1}
+	fi
+	echo "$container"
+}
+
+function create_pattern() {
+    files_paths_list=("$@")
+    pattern=""
+    for file_name in $files_paths_list
+    do
+        pattern="${pattern}${file_name}|"
+    done
+    pattern=$(remove_last_char_if_not_empty "${pattern[*]}")
+    echo "$pattern"
+}
+
+function filter_array_with_inverted_regEx() {
+	files_paths_list=("$@")
+	query=$2
+	container=""
+	if [[ -z "${query}" ]]
+    then
+        container=$files_paths_list
+	else
+        for value in $files_paths_list
+        do
+            matched_string=$(echo "$value" | grep -v -E "$query")
+            if [[ -n "$matched_string" ]]
+            then
+                container="${container}${value} "
+            fi
+        done
+        container=$(remove_last_char_if_not_empty "${container[*]}")
+    fi
+	echo "$container"
+}
+
+function add_files_to_staged_tree() {
+	files_paths=("$@")
+		if [[ -n "${files_paths// }" ]]
+    then
+        git add $files_paths
+    fi
+}
+
+eslint_autofix_flag=""
+prettier_autofix_flag=""
+ends_with_ts_or_tsx=".*\.tsx?$"
+ends_with_json=".*\.json$"
+eslint_exit_code=0
+prettier_exit_code=0
+not_staged_ts_tsx_files=$(git diff --diff-filter=b --name-only | grep -E "$ends_with_ts_or_tsx")
+not_staged_json_files=$(git diff --diff-filter=b --name-only | grep -E "$ends_with_json")
+staged_ts_tsx_files=$(git diff --cached --diff-filter=d --name-only | grep -E "$ends_with_ts_or_tsx")
+staged_json_files=$(git diff --cached --diff-filter=d --name-only | grep -E "$ends_with_json")
+ts_tsx_filter_regex=$(create_pattern "${not_staged_ts_tsx_files[*]}")
+json_filter_regex=$(create_pattern "${not_staged_json_files[*]}")
+ts_tsx_files_to_add_after_linting=$(filter_array_with_inverted_regEx "${staged_ts_tsx_files[*]}" "${ts_tsx_filter_regex}")
+json_files_to_add_after_linting=$(filter_array_with_inverted_regEx "${staged_json_files[*]}" "${json_filter_regex}")
+
+if [ ${#ts_tsx_files_to_add_after_linting} = ${#staged_ts_tsx_files} ]
+then
+	eslint_autofix_flag="--fix"
+fi
+if [ ${#json_files_to_add_after_linting} = ${#staged_json_files} ]
+then
+	prettier_autofix_flag="--write"
+fi
+if [[ -n "$staged_ts_tsx_files" ]]
+then
+    echo "Running ESLint..."
+    ./node_modules/.bin/eslint $staged_ts_tsx_files --quiet $eslint_autofix_flag
+    eslint_exit_code=$?
+fi
+if [[ -n "$staged_json_files" ]]
+then
+    echo "Running Prettier on .json files..."
+    ./node_modules/.bin/prettier $staged_json_files $prettier_autofix_flag
+    prettier_exit_code=$?
+fi
+if [ $eslint_exit_code = 0 ] && [ $prettier_exit_code = 0 ]
+then
+    add_files_to_staged_tree "${ts_tsx_files_to_add_after_linting[*]} ${json_files_to_add_after_linting[*]}"
+    echo -e "${GREEN} ✔ Committed successfully *^____^* ${NC}"
+    exit 0
+else
+    echo -e "${RED} ❌ Couldn't commit changes dues to above errors ＞﹏＜ ${NC}"
+    exit 1
+fi
