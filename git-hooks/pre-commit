@@ -53,7 +53,7 @@ function add_files_to_staged_tree() {
 }
 
 eslint_autofix_flag=""
-prettier_autofix_flag=""
+prettier_autofix_flag="--check"
 ends_with_ts_or_tsx=".*\.tsx?$"
 ends_with_json=".*\.json$"
 eslint_exit_code=0
@@ -78,13 +78,13 @@ fi
 if [[ -n "$staged_ts_tsx_files" ]]
 then
     echo "Running ESLint..."
-    ./node_modules/.bin/eslint $staged_ts_tsx_files --quiet $eslint_autofix_flag
+    ./node_modules/.bin/eslint $staged_ts_tsx_files --cache $eslint_autofix_flag
     eslint_exit_code=$?
 fi
 if [[ -n "$staged_json_files" ]]
 then
     echo "Running Prettier on .json files..."
-    ./node_modules/.bin/prettier $staged_json_files $prettier_autofix_flag
+    ./node_modules/.bin/prettier $prettier_autofix_flag $staged_json_files
     prettier_exit_code=$?
 fi
 if [ $eslint_exit_code = 0 ] && [ $prettier_exit_code = 0 ]

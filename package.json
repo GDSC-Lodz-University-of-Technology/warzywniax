@@ -8,9 +8,9 @@
     "serve": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint:ts": "eslint . --ext .ts --ext .tsx",
-    "lint:ts:fix": "eslint . --ext .ts --ext .tsx --fix",
-    "lint:ts:watch": "esw . --watch --ext .ts --ext .tsx ",
+    "lint:ts": "eslint . --cache --ext .ts --ext .tsx",
+    "lint:ts:fix": "eslint . --cache --ext .ts --ext .tsx --fix",
+    "lint:ts:watch": "esw . --watch --cache --ext .ts --ext .tsx ",
     "prettyprint": "prettier --check .",
     "prettyprint:fix": "prettier --write ."
   },
