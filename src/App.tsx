@@ -1,11 +1,35 @@
-import { useTranslation } from 'react-i18next';
+import { Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 export function App() {
-  const { t } = useTranslation();
-
   return (
-    <div className='App'>
-      <h1>{t('app.welcome')}</h1>
-    </div>
+    <nav className='App'>
+      <ul>
+        <li>
+          <Link
+            component={RouterLink}
+            to='/'
+          >
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link
+            component={RouterLink}
+            to='/offers'
+          >
+            Offers
+          </Link>
+        </li>
+        <li>
+          <Link
+            component={RouterLink}
+            to='/shops'
+          >
+            Shops
+          </Link>
+        </li>
+      </ul>
+    </nav>
   );
 }

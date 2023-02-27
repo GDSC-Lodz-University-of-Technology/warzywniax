@@ -13,7 +13,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-export const customTheme = createTheme({
+export const CUSTOM_THEME = createTheme({
   breakpoints: {
     values: {
       desktop: 1024,

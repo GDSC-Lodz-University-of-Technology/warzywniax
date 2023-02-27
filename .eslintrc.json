@@ -149,13 +149,6 @@
         "ignoreCase": true
       }
     ],
-    "sort-keys": [
-      "error",
-      "asc",
-      {
-        "caseSensitive": false
-      }
-    ],
     "yoda": ["error", "never"],
     "prettier/prettier": "error",
     "import/no-default-export": "error",
@@ -189,6 +182,7 @@
     "no-template-curly-in-string": "off",
     "no-unmodified-loop-condition": "off",
     "no-use-before-define": "off",
+    "sort-keys": "off",
     "accessor-pairs": "off",
     "no-magic-numbers": "off",
     "@typescript-eslint/no-magic-numbers": "off",

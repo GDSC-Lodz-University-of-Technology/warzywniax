@@ -1,17 +1,21 @@
-import * as appEN from '../locales/en/app.json';
-import * as appPL from '../locales/pl/app.json';
+import * as offersEN from './en/offers.json';
+import * as offersPL from './pl/offers.json';
+import * as shopsEN from './en/shops.json';
+import * as shopsPL from './pl/shops.json';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 const resources = {
   en: {
     components: {
-      app: appEN,
+      shops: shopsEN,
+      offers: offersEN,
     },
   },
   pl: {
     components: {
-      app: appPL,
+      shops: shopsPL,
+      offers: offersPL,
     },
   },
 };
