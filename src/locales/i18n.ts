@@ -8,14 +8,14 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     components: {
-      shops: shopsEN,
       offers: offersEN,
+      shops: shopsEN,
     },
   },
   pl: {
     components: {
-      shops: shopsPL,
       offers: offersPL,
+      shops: shopsPL,
     },
   },
 };

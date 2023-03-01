@@ -13,7 +13,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-export const CUSTOM_THEME = createTheme({
+export const customTheme = createTheme({
   breakpoints: {
     values: {
       desktop: 1024,
@@ -21,4 +21,5 @@ export const CUSTOM_THEME = createTheme({
       tablet: 768,
     },
   },
+  spacing: (factor: number) => `${0.5 * factor}rem`,
 });

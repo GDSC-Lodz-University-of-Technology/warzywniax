@@ -21,6 +21,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
     "plugin:import/errors",
     "plugin:import/typescript",
@@ -69,7 +70,7 @@
     "no-useless-backreference": "error",
     "use-isnan": "error",
     "valid-typeof": "error",
-    "arrow-body-style": ["error", "always"],
+    "arrow-body-style": ["error", "as-needed"],
     "camelcase": [
       "error",
       {
@@ -130,6 +131,9 @@
     "no-useless-escape": "error",
     "no-useless-rename": "error",
     "no-useless-return": "error",
+    "no-constant-binary-expression": "error",
+    "no-template-curly-in-string": "error",
+    "no-await-in-loop": "error",
     "no-var": "error",
     "no-with": "error",
     "object-shorthand": ["error", "consistent-as-needed"],
@@ -143,6 +147,7 @@
     "radix": ["error", "always"],
     "require-await": "error",
     "require-yield": "error",
+    "sort-keys": "error",
     "sort-imports": [
       "error",
       {
@@ -156,9 +161,10 @@
     "import/no-unresolved": [
       "error",
       {
-        "ignore": [".scss$"]
+        "ignore": [".css$"]
       }
     ],
+    "@typescript-eslint/no-namespace": "error",
     "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-non-null-assertion": "error",
     "@typescript-eslint/no-explicit-any": "error",
@@ -176,17 +182,12 @@
       }
     ],
     //Disabled
-    "no-await-in-loop": "off",
     "no-shadow": "off",
-    "no-constant-binary-expression": "off",
-    "no-template-curly-in-string": "off",
     "no-unmodified-loop-condition": "off",
     "no-use-before-define": "off",
-    "sort-keys": "off",
     "accessor-pairs": "off",
     "no-magic-numbers": "off",
     "@typescript-eslint/no-magic-numbers": "off",
-    "@typescript-eslint/no-namespace": "off",
     "react/react-in-jsx-scope": "off"
   },
   "overrides": []

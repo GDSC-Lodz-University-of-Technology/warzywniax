@@ -8,4 +8,4 @@ const rootRoute: RouteObject = {
   path: '/',
 };
 
-export const ROUTER = createBrowserRouter([rootRoute, offersRoute, shopsRoute]);
+export const router = createBrowserRouter([rootRoute, offersRoute, shopsRoute]);
