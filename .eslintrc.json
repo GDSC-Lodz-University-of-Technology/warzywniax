@@ -187,8 +187,7 @@
     "no-use-before-define": "off",
     "accessor-pairs": "off",
     "no-magic-numbers": "off",
-    "@typescript-eslint/no-magic-numbers": "off",
-    "react/react-in-jsx-scope": "off"
+    "@typescript-eslint/no-magic-numbers": "off"
   },
   "overrides": []
 }
