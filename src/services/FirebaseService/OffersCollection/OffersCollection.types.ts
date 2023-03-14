@@ -1,25 +1,27 @@
-import { GeoPoint } from 'firebase/firestore';
-import { ProductCategory } from '../ShopsCollection/ProductCollection.types';
+import { ZDocumentReference, ZGeoPoint } from '../../../common/zod.utils';
+import { ProductCategoryEnum } from '../ShopsCollection/ProductCollection.types';
+import { z } from 'zod';
 
-export interface OfferRecord {
-  id: string;
-  unitPrice: number;
-  baseProductInfo: BaseProductInfo;
-  baseShopInfo: BaseShopInfo;
-  productsInOffer: number;
-  description?: string;
-}
+export const BaseProductInfo = z.object({
+  categories: z.array(ProductCategoryEnum),
+  photoUrl: z.string(),
+  quantityUnit: z.string(),
+});
+export type BaseProductInfo = z.infer<typeof BaseProductInfo>;
 
-interface BaseProductInfo {
-  id: string;
-  photoUrl: string;
-  quantityUnit: string;
-  categories: ProductCategory[];
-}
+export const BaseShopInfo = z.object({
+  geoPoint: ZGeoPoint,
+  locationId: ZDocumentReference,
+  name: z.string(),
+  shopId: z.string(),
+});
+export type BaseShopInfo = z.infer<typeof BaseShopInfo>;
 
-interface BaseShopInfo {
-  shopId: string;
-  name: string;
-  locationId: string;
-  geoPoint: GeoPoint;
-}
+export const OfferRecord = z.object({
+  baseProductInfo: BaseProductInfo,
+  baseShopInfo: BaseShopInfo,
+  description: z.string().optional(),
+  productsInOffer: z.number(),
+  unitPrice: z.number(),
+});
+export type OfferRecord = z.infer<typeof OfferRecord>;

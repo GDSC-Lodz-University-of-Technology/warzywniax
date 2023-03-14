@@ -1,15 +1,17 @@
 import { LocationRecord } from './LocationCollection.types';
+import { z } from 'zod';
 
-export interface ShopRecord {
-  name: string;
-  description: string;
-  owner: ShopOwner;
-  mainLocation: Required<LocationRecord>;
-}
+export const ShopOwner = z.object({
+  avatarUrl: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
+});
+export type ShopOwner = z.infer<typeof ShopOwner>;
 
-interface ShopOwner {
-  id: string;
-  firstName: string;
-  lastName: string;
-  avatarUrl: string;
-}
+export const ShopRecord = z.object({
+  description: z.string(),
+  mainLocation: LocationRecord.required(),
+  name: z.string(),
+  owner: ShopOwner,
+});
+export type ShopRecord = z.infer<typeof ShopRecord>;

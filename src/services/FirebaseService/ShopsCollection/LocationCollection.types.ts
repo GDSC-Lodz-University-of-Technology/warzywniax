@@ -1,7 +1,9 @@
-import { GeoPoint } from 'firebase/firestore';
+import { z } from 'zod';
+import { ZGeoPoint } from '../../../common/zod.utils';
 
-export interface LocationRecord {
-  geoPoint: GeoPoint;
-  description?: string;
-  photoUrl?: string;
-}
+export const LocationRecord = z.object({
+  description: z.string().optional(),
+  geoPoint: ZGeoPoint,
+  photoUrl: z.string().optional(),
+});
+export type LocationRecord = z.infer<typeof LocationRecord>;

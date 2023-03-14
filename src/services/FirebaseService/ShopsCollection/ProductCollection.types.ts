@@ -1,12 +1,6 @@
-export interface ProductRecord {
-  name: string;
-  photoUrl: string;
-  quantityUnit: string;
-  categories: ProductCategory[];
-  description?: string;
-}
+import { z } from 'zod';
 
-export const enum ProductCategory {
+export enum ProductCategory {
   FRUITS,
   VEGETABLES,
   JUICES,
@@ -15,3 +9,14 @@ export const enum ProductCategory {
   HERBS,
   OTHER,
 }
+export const ProductCategoryEnum = z.nativeEnum(ProductCategory);
+export type ProductCategoryEnum = z.infer<typeof ProductCategoryEnum>;
+
+export const ProductRecord = z.object({
+  categories: z.array(ProductCategoryEnum),
+  description: z.string().optional(),
+  name: z.string(),
+  photoUrl: z.string(),
+  quantityUnit: z.string(),
+});
+export type ProductRecord = z.infer<typeof ProductRecord>;
