@@ -6,13 +6,19 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-.eslintcache
+firebase-debug.log*
+firebase-debug.*.log*
 
-# Directories
-node_modules
-dist
-dist-ssr
-*.local
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Caches
+buildcache/
+.firebase/
+.eslintcache
 
 # Editor directories and files
 .vscode/*
@@ -24,3 +30,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Other
+node_modules
+dist
+/firebase/seed
+dist-ssr
+*.local
