@@ -1,4 +1,4 @@
-import { ZDocumentReference, ZGeoPoint } from '../../../common/zod.utils';
+import { ZDocumentReference, ZGeoPoint } from '../../../common/utils/zod.utils';
 import { ProductCategoryEnum } from '../ShopsCollection/ProductCollection.types';
 import { z } from 'zod';
 

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ZGeoPoint } from '../../../common/zod.utils';
+import { ZGeoPoint } from '../../../common/utils/zod.utils';
 
 export const LocationRecord = z.object({
   description: z.string().optional(),
