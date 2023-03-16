@@ -22,4 +22,7 @@ export const customTheme = createTheme({
     },
   },
   spacing: (factor: number) => `${0.5 * factor}rem`,
+  typography: {
+    fontFamily: 'Montserrat, sans-serif',
+  },
 });
