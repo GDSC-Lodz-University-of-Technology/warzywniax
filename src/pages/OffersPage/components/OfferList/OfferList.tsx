@@ -1,9 +1,10 @@
+import { Box, LinearProgress } from '@mui/material';
+import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import { IOfferProps } from '../Offer/Offer.types';
 import { Offer } from '../Offer/Offer';
-import { useEffect } from 'react';
 
-const data: IOfferProps[] = [
+const datalist: IOfferProps[] = [
   {
     categories: ['warzywa', 'owoce'],
     location: 'Łódź',
@@ -72,36 +73,70 @@ const data: IOfferProps[] = [
 ];
 
 export const OfferList = () => {
-  // const handleScroll = () => {};
+  const [data, setData] = useState<IOfferProps[]>(datalist);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // addEventListener('scroll', handleScroll);
-  }, []);
+    const response = datalist;
+    setData((prevData) => [...prevData, ...response]);
+    setIsLoading(false);
+  }, [page]);
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 1 >=
+      document.documentElement.scrollHeight
+    ) {
+      setIsLoading(true);
+      setPage((prevPage) => prevPage + 1);
+      console.log(page);
+    }
+  };
+
+  useEffect(() => {
+    addEventListener('scroll', handleScroll);
+    return () => removeEventListener('scroll', handleScroll);
+  });
 
   return (
-    <Grid
-      container
-      spacing={3}
-      columns={{ desktop: 8, mobile: 4 }}
-    >
-      {data.map(
-        ({ categories, location, name, photoUrl, quantityUnit, shopName, unitPrice }, index) => (
-          <Grid
-            key={index}
-            mobile={4}
-          >
-            <Offer
-              name={name}
-              photoUrl={photoUrl}
-              shopName={shopName}
-              unitPrice={unitPrice}
-              quantityUnit={quantityUnit}
-              location={location}
-              categories={categories}
-            />
-          </Grid>
-        )
+    <>
+      <Grid
+        container
+        spacing={3}
+        columns={{ desktop: 8, mobile: 4 }}
+      >
+        {data.map(
+          ({ categories, location, name, photoUrl, quantityUnit, shopName, unitPrice }, index) => (
+            <Grid
+              key={index}
+              mobile={4}
+            >
+              <Offer
+                name={name}
+                photoUrl={photoUrl}
+                shopName={shopName}
+                unitPrice={unitPrice}
+                quantityUnit={quantityUnit}
+                location={location}
+                categories={categories}
+              />
+            </Grid>
+          )
+        )}
+      </Grid>
+      {isLoading && (
+        <Box sx={{ py: 3, width: '100%' }}>
+          <LinearProgress
+            sx={{
+              '& .MuiLinearProgress-bar': {
+                backgroundColor: '#fff',
+              },
+              backgroundColor: '#C8C8C9',
+            }}
+          />
+        </Box>
       )}
-    </Grid>
+    </>
   );
 };

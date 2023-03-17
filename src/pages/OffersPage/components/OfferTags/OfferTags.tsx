@@ -1,26 +1,25 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, ButtonProps, styled } from '@mui/material';
+
+const TagButton = styled(Button)<ButtonProps>(() => ({
+  '&:hover': {
+    backgroundColor: '#C8EED2',
+    filter: 'brightness(95%)',
+  },
+  backgroundColor: '#C8EED2',
+  borderRadius: '0.5rem',
+  color: 'black',
+  fontSize: '0.8rem',
+  fontWeight: '400',
+  height: '1.1rem',
+  px: '0.7rem',
+  py: '0.1rem',
+  textTransform: 'none',
+}));
 
 export const OfferTags = ({ categories }: { categories: string[] }) => (
-  <Box
-    component='div'
-    sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}
-  >
+  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
     {categories.map((category) => (
-      <Typography
-        component='span'
-        key={category}
-        sx={{
-          backgroundColor: '#C8EED2',
-          borderRadius: '0.5rem',
-          color: 'primary',
-          fontSize: '0.8rem',
-          fontWeight: 'regular',
-          px: '0.7rem',
-          py: '0.1rem',
-        }}
-      >
-        {category}
-      </Typography>
+      <TagButton key={category}>{category}</TagButton>
     ))}
   </Box>
 );
