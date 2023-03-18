@@ -17,7 +17,17 @@ const TagButton = styled(Button)<ButtonProps>(() => ({
 }));
 
 export const OfferTags = ({ categories }: { categories: string[] }) => (
-  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+  <Box
+    sx={{
+      '&::-webkit-scrollbar': {
+        display: 'none',
+      },
+      display: 'flex',
+      gap: '0.4rem',
+      overflowX: 'scroll',
+      overflowY: 'hidden',
+    }}
+  >
     {categories.map((category) => (
       <TagButton key={category}>{category}</TagButton>
     ))}

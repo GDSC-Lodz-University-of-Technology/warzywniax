@@ -3,7 +3,6 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 
 const LocationButton = styled('button')(() => ({
   '&:hover': {
-    background: 'none',
     filter: 'brightness(95%)',
   },
   alignItems: 'flex-start',
@@ -12,8 +11,8 @@ const LocationButton = styled('button')(() => ({
   color: '#C8C8C9',
   cursor: 'pointer',
   display: 'flex',
+  marginLeft: '0.25rem',
   padding: 0,
-  textTransform: 'none',
 }));
 
 export const LocationMark = ({ location }: { location: string }) => (
