@@ -31,6 +31,5 @@
     "jsx": "react-jsx",
     "resolveJsonModule": true,
     "baseUrl": "src"
-  },
-  "include": ["./src"]
+  }
 }
