@@ -33,6 +33,11 @@ declare module 'firebase/firestore' {
     path: T,
     ...pathSegments: Partial<[string, AvailableSubCollections<infer T>]>
   ): CollectionReference<FireStoreCollectionReturnType<T, AvailableSubCollections<infer T>>>;
+  export declare function collection<T extends AvailableSubCollectionsNames>(
+    reference: DocumentReference,
+    path: string,
+    ...pathSegments: string[]
+  ): CollectionReference<FireStoreSubCollectionReturnType<T>>;
   export declare function doc<
     T extends AvailableCollections,
     V extends AvailableSubCollections<infer T> = unknown
@@ -41,4 +46,12 @@ declare module 'firebase/firestore' {
     path: T,
     ...pathSegments: string[]
   ): DocumentReference<FireStoreCollectionReturnType<T, V>>;
+  export declare function doc<
+    T extends AvailableCollections,
+    V extends AvailableSubCollections<infer T> = unknown
+  >(
+    reference: DocumentReference<FireStoreCollectionReturnType<T>>,
+    path: V,
+    ...pathSegments: string[]
+  ): DocumentReference<FireStoreSubCollectionReturnType<V>>;
 }

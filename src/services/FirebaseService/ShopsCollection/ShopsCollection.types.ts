@@ -1,18 +1,6 @@
 import { LocationRecord } from './LocationCollection.types';
 import { z } from 'zod';
 
-export const SHOPS_COLLECTION = {
-  name: 'shops',
-  subCollections: {
-    locationsCollection: {
-      name: 'locations',
-    },
-    productsCollection: {
-      name: 'products',
-    },
-  },
-} as const;
-
 export const ShopOwner = z.object({
   avatarUrl: z.string(),
   firstName: z.string(),

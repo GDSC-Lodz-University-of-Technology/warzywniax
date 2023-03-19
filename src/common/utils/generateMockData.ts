@@ -1,8 +1,13 @@
 import { DocumentReference, GeoPoint } from 'firebase/firestore';
 import {
+  ProductCategory,
+  ProductRecord,
+} from '../../services/FirebaseService/ShopsCollection/ProductCollection.types';
+import {
   ShopOwner,
   ShopRecord,
 } from '../../services/FirebaseService/ShopsCollection/ShopsCollection.types';
+import { createManyProducts } from '../../services/FirebaseService/ShopsCollection/ProductsService';
 import { createManyShop } from '../../services/FirebaseService/ShopsCollection/ShopsService';
 import { generateRandomInteger } from './generateRandomInteger';
 import { generateRandomNumber } from './generateRandomNumber';
@@ -55,6 +60,18 @@ const LAST_NAMES = [
   'Buffet',
   'Stark',
 ];
+const PRODUCTS: Array<[string, ProductCategory]> = [
+  ['cucumber', ProductCategory.VEGETABLES],
+  ['onion', ProductCategory.VEGETABLES],
+  ['apple', ProductCategory.FRUITS],
+  ['cherry', ProductCategory.FRUITS],
+  ['basil', ProductCategory.HERBS],
+  ['mint', ProductCategory.HERBS],
+  ['apple juice', ProductCategory.JUICES],
+  ['hazelnuts', ProductCategory.NUTS],
+  ['plump jam', ProductCategory.JAM],
+  ['śliwowica', ProductCategory.OTHER],
+];
 
 function getRandomFirstName(): string {
   return FIRST_NAMES[generateRandomInteger(0, FIRST_NAMES.length - 1)];
@@ -93,6 +110,10 @@ async function getRandomDescription(paragraphs = 1): Promise<string> {
   return await dinosResponse.text();
 }
 
+function getRandomProduct(): [string, ProductCategory] {
+  return PRODUCTS[generateRandomInteger(0, PRODUCTS.length)];
+}
+
 async function generateRandomOwner(): Promise<ShopOwner> {
   return {
     avatarUrl: await getRandomPhotoUrl(640, 640),
@@ -101,7 +122,32 @@ async function generateRandomOwner(): Promise<ShopOwner> {
   };
 }
 
-export async function generateMockShops(count = 50): Promise<DocumentReference<ShopRecord>[]> {
+async function generateProductsMock(
+  shopId: DocumentReference<ShopRecord>,
+  count: number
+): Promise<DocumentReference<ProductRecord>[]> {
+  const products: ProductRecord[] = [];
+  for (let i = 0; i < count; i++) {
+    const [name, category] = getRandomProduct();
+    const [description, photoUrl] = await Promise.all([
+      getRandomDescription(2),
+      getRandomPhotoUrl(),
+    ]);
+    products.push({
+      categories: [category],
+      description: description,
+      name: name,
+      photoUrl: photoUrl,
+      quantityUnit: 'piece',
+    });
+  }
+  return createManyProducts(shopId, products);
+}
+
+export async function generateMockShops(
+  count = 50,
+  [minProducts, maxProducts] = [1, 10]
+): Promise<void> {
   const shops: ShopRecord[] = [];
   for (let i = 0; i < count; i++) {
     const [shopDescription, locationDescription, shopPhoto, shopOwner] = await Promise.all([
@@ -121,5 +167,12 @@ export async function generateMockShops(count = 50): Promise<DocumentReference<S
       owner: shopOwner,
     });
   }
-  return await createManyShop(shops);
+  const createdShops = await createManyShop(shops);
+  const productsToAdd: Array<Promise<DocumentReference<ProductRecord>[]>> = [];
+  for (const createdShop of createdShops) {
+    productsToAdd.push(
+      generateProductsMock(createdShop, generateRandomInteger(minProducts, maxProducts))
+    );
+  }
+  await Promise.all(productsToAdd);
 }
