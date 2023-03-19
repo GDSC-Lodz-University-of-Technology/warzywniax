@@ -12,7 +12,12 @@
     "lint:ts:fix": "eslint . --cache --ext .ts --ext .tsx --fix",
     "lint:ts:watch": "esw . --watch --cache --ext .ts --ext .tsx ",
     "prettyprint": "prettier --check .",
-    "prettyprint:fix": "prettier --write ."
+    "prettyprint:fix": "prettier --write .",
+    "firebase:run:emulator": "cd firebase && firebase emulators:start --project=warzywniax --import=./seed --export-on-exit",
+    "firebase:deploy": "cd firebase && firebase deploy --only storage,firestore:rules,firestore:indexes",
+    "firebase:deploy:storage-rules": "cd firebase && firebase deploy --only storage",
+    "firebase:deploy:firestore-rules": "cd firebase && firebase deploy --only firestore:rules",
+    "firebase:deploy:firesotre-indexes": "cd firebase && firebase deploy --only firestore:indexes"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -26,7 +31,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.1.5",
-    "react-router-dom": "^6.8.1"
+    "react-router-dom": "^6.8.1",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
@@ -41,6 +47,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-watch": "^8.0.0",
+    "firebase-tools": "^11.24.1",
     "prettier": "^2.8.4",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
