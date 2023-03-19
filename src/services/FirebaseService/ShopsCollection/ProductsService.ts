@@ -1,6 +1,14 @@
-import { addDoc, collection, doc, DocumentReference, writeBatch } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  DocumentReference,
+  getDocs,
+  query,
+  writeBatch,
+} from 'firebase/firestore';
 import { Collection, SubCollection } from '../FireBaseService.types';
-import { FirestoreError, SetOptions } from '@firebase/firestore';
+import { FirestoreError, QuerySnapshot, SetOptions } from '@firebase/firestore';
 import { firebaseDB } from '../firebase.config';
 import { isNullOrUndefined } from '../../../common/utils/isNullOrUndefined';
 import { ProductRecord } from './ProductCollection.types';
@@ -38,4 +46,11 @@ export async function createManyProducts(
     console.error(error);
   });
   return createdDocs;
+}
+
+export async function getAllShopProducts(
+  shop: DocumentReference<ShopRecord>
+): Promise<QuerySnapshot<ProductRecord>> {
+  const productsRef = collection<SubCollection.PRODUCTS>(shop, SubCollection.PRODUCTS);
+  return await getDocs(query(productsRef));
 }

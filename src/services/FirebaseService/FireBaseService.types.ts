@@ -1,6 +1,6 @@
 export const enum Collection {
   SHOPS = 'shops',
-  OFFERS = 'offer',
+  OFFERS = 'offers',
 }
 
 export const enum SubCollection {

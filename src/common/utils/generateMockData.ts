@@ -1,4 +1,8 @@
-import { DocumentReference, GeoPoint } from 'firebase/firestore';
+import {
+  createManyProducts,
+  getAllShopProducts,
+} from '../../services/FirebaseService/ShopsCollection/ProductsService';
+import { DocumentReference, GeoPoint, getDoc } from 'firebase/firestore';
 import {
   ProductCategory,
   ProductRecord,
@@ -7,12 +11,16 @@ import {
   ShopOwner,
   ShopRecord,
 } from '../../services/FirebaseService/ShopsCollection/ShopsCollection.types';
+import { Collection } from '../../services/FirebaseService/FireBaseService.types';
 import { createManyLocations } from '../../services/FirebaseService/ShopsCollection/LocationService';
-import { createManyProducts } from '../../services/FirebaseService/ShopsCollection/ProductsService';
+import { createManyOffers } from '../../services/FirebaseService/OffersCollection/OffersCollectionService';
 import { createManyShop } from '../../services/FirebaseService/ShopsCollection/ShopsService';
+import { DocumentDoesntExistsError } from '../../errors/DocumentDoesntExistsError';
 import { generateRandomInteger } from './generateRandomInteger';
 import { generateRandomNumber } from './generateRandomNumber';
+import { isNullOrUndefined } from './isNullOrUndefined';
 import { LocationRecord } from '../../services/FirebaseService/ShopsCollection/LocationCollection.types';
+import { OfferRecord } from '../../services/FirebaseService/OffersCollection/OffersCollection.types';
 
 const SHOP_NAMES_PREFIX = [
   'magical',
@@ -165,7 +173,48 @@ async function generateLocationMock(
   return createManyLocations(shopId, locations);
 }
 
-export async function generateMockShops(
+async function generateMockOffers(
+  shopReference: DocumentReference<ShopRecord>
+): Promise<DocumentReference<OfferRecord>[]> {
+  const [products, shopDataSnapshot] = await Promise.all([
+    getAllShopProducts(shopReference),
+    getDoc(shopReference),
+  ]);
+  const shopData = shopDataSnapshot.data();
+  if (isNullOrUndefined(shopData)) {
+    throw new DocumentDoesntExistsError(shopReference.id, Collection.SHOPS);
+  }
+  const offers: OfferRecord[] = [];
+  const offerDescriptionsQuery: Array<Promise<string>> = [];
+  for (let i = 0; i < products.size; i++) {
+    offerDescriptionsQuery.push(getRandomDescription(2));
+  }
+  const offersDescriptions = await Promise.all(offerDescriptionsQuery);
+  let offerIdx = 0;
+  products.forEach((product) => {
+    const productData = product.data();
+    offers.push({
+      baseProductInfo: {
+        categories: productData.categories,
+        id: product.ref,
+        photoUrl: productData.photoUrl,
+        quantityUnit: productData.quantityUnit,
+      },
+      baseShopInfo: {
+        geoPoint: shopData.mainLocation.geoPoint,
+        id: shopReference,
+        name: shopData.name,
+      },
+      description: offersDescriptions[offerIdx],
+      productsInOffer: generateRandomInteger(1, 100),
+      unitPrice: generateRandomInteger(1, 20),
+    });
+    offerIdx += 1;
+  });
+  return createManyOffers(offers);
+}
+
+export async function generateShopsMock(
   count = 50,
   [minProducts, maxProducts] = [1, 10],
   [minLocations, maxLocations] = [0, 10]
@@ -201,4 +250,9 @@ export async function generateMockShops(
     );
   }
   await Promise.all([...productsToAdd, ...locationsToAdd]);
+  const offersToCreate: Array<Promise<DocumentReference<OfferRecord>[]>> = [];
+  for (const createdShop of createdShops) {
+    offersToCreate.push(generateMockOffers(createdShop));
+  }
+  await Promise.all(offersToCreate);
 }
