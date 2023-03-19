@@ -5,5 +5,5 @@ export const enum Collection {
 
 export const enum SubCollection {
   PRODUCTS = 'products',
-  OFFERS = 'offers',
+  LOCATIONS = 'locations',
 }

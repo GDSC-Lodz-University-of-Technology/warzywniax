@@ -7,10 +7,12 @@ import {
   ShopOwner,
   ShopRecord,
 } from '../../services/FirebaseService/ShopsCollection/ShopsCollection.types';
+import { createManyLocations } from '../../services/FirebaseService/ShopsCollection/LocationService';
 import { createManyProducts } from '../../services/FirebaseService/ShopsCollection/ProductsService';
 import { createManyShop } from '../../services/FirebaseService/ShopsCollection/ShopsService';
 import { generateRandomInteger } from './generateRandomInteger';
 import { generateRandomNumber } from './generateRandomNumber';
+import { LocationRecord } from '../../services/FirebaseService/ShopsCollection/LocationCollection.types';
 
 const SHOP_NAMES_PREFIX = [
   'magical',
@@ -144,9 +146,29 @@ async function generateProductsMock(
   return createManyProducts(shopId, products);
 }
 
+async function generateLocationMock(
+  shopId: DocumentReference<ShopRecord>,
+  count: number
+): Promise<DocumentReference<LocationRecord>[]> {
+  const locations: LocationRecord[] = [];
+  for (let i = 0; i < count; i++) {
+    const [description, photoUrl] = await Promise.all([
+      getRandomDescription(1),
+      getRandomPhotoUrl(),
+    ]);
+    locations.push({
+      description: description,
+      geoPoint: getRandomGeoPoint(),
+      photoUrl: photoUrl,
+    });
+  }
+  return createManyLocations(shopId, locations);
+}
+
 export async function generateMockShops(
   count = 50,
-  [minProducts, maxProducts] = [1, 10]
+  [minProducts, maxProducts] = [1, 10],
+  [minLocations, maxLocations] = [0, 10]
 ): Promise<void> {
   const shops: ShopRecord[] = [];
   for (let i = 0; i < count; i++) {
@@ -169,10 +191,14 @@ export async function generateMockShops(
   }
   const createdShops = await createManyShop(shops);
   const productsToAdd: Array<Promise<DocumentReference<ProductRecord>[]>> = [];
+  const locationsToAdd: Array<Promise<DocumentReference<LocationRecord>[]>> = [];
   for (const createdShop of createdShops) {
     productsToAdd.push(
       generateProductsMock(createdShop, generateRandomInteger(minProducts, maxProducts))
     );
+    locationsToAdd.push(
+      generateLocationMock(createdShop, generateRandomInteger(minLocations, maxLocations))
+    );
   }
-  await Promise.all(productsToAdd);
+  await Promise.all([...productsToAdd, ...locationsToAdd]);
 }
