@@ -197,7 +197,7 @@
   },
   "overrides": [
     {
-      "files": ["**/generateMockData.ts"],
+      "files": ["**/generateShopsMock.ts"],
       "rules": {
         "no-await-in-loop": "off"
       }
