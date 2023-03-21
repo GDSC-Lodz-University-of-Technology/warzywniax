@@ -1,30 +1,10 @@
-import {
-  Box,
-  Button,
-  ButtonProps,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  styled,
-} from '@mui/material';
+import { Box, Card, CardActions, CardContent, CardMedia } from '@mui/material';
 import { FC } from 'react';
+import { GradientButton } from '../../../../templates/GradientButton/GradientButton';
 import { IOfferProps } from './Offer.types';
 import { LocationMark } from '../LocationMark/LocationMark';
 import { OfferTags } from '../OfferTags/OfferTags';
 import Typography from '@mui/material/Typography';
-
-const StyledButton = styled(Button)<ButtonProps>(() => ({
-  '&:hover': {
-    background: 'linear-gradient(91.81deg, #3E8914 0%, #81B214 100%)',
-    filter: 'brightness(105%)',
-  },
-  background: 'linear-gradient(91.81deg, #3E8914 0%, #81B214 100%)',
-  borderRadius: '0.75rem',
-  color: 'white',
-  fontWeight: '700',
-  width: '60%',
-}));
 
 export const Offer: FC<IOfferProps> = ({
   categories,
@@ -52,27 +32,40 @@ export const Offer: FC<IOfferProps> = ({
       image={photoUrl}
       alt={`Photo of ${name}`}
     />
-    <Box sx={{ display: 'flex', flexDirection: 'column', width: 1 }}>
-      <CardContent sx={{ pt: 1.5, px: 1.5 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <OfferTags categories={categories} />
-          <LocationMark location={location} />
-        </Box>
-        <Typography
-          component='div'
-          variant='h5'
-          fontWeight='600'
-        >
-          {name}
-        </Typography>
-        <Typography
-          variant='subtitle1'
-          color='text.secondary'
-          fontWeight='400'
-          component='div'
-        >
-          {shopName}
-        </Typography>
+    <Box sx={{ display: 'flex', flexDirection: 'column', width: 'calc(100% - 14rem)' }}>
+      <CardContent
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          flexGrow: 1,
+          justifyContent: 'space-between',
+          padding: 1.5,
+          pb: 0,
+        }}
+      >
+        <div>
+          <Box sx={{ display: 'flex', height: '24px', justifyContent: 'space-between' }}>
+            <OfferTags categories={categories} />
+            <LocationMark location={location} />
+          </Box>
+          <Typography
+            component='div'
+            variant='h5'
+            fontWeight='600'
+            noWrap
+          >
+            {name}
+          </Typography>
+          <Typography
+            variant='subtitle1'
+            color='text.secondary'
+            fontWeight='400'
+            component='div'
+            sx={{ overflowX: 'hidden' }}
+          >
+            {shopName}
+          </Typography>
+        </div>
         <Box
           sx={{
             alignItems: 'last baseline',
@@ -81,10 +74,10 @@ export const Offer: FC<IOfferProps> = ({
           }}
         >
           <Typography
-            variant='h4'
             fontWeight='600'
             color='text.secondary'
             component='div'
+            sx={{ fontSize: '2.5rem', lineHeight: 0 }}
           >
             {unitPrice}
           </Typography>
@@ -99,7 +92,7 @@ export const Offer: FC<IOfferProps> = ({
         </Box>
       </CardContent>
       <CardActions sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
-        <StyledButton>Details</StyledButton>
+        <GradientButton sx={{ width: 2 / 3 }}>Details</GradientButton>
       </CardActions>
     </Box>
   </Card>

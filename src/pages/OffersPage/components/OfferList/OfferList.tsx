@@ -6,7 +6,23 @@ import { Offer } from '../Offer/Offer';
 
 const datalist: IOfferProps[] = [
   {
-    categories: ['warzywa', 'owoce'],
+    categories: [
+      'warzywa',
+      'owoce',
+      'przetwory',
+      'mrożonki',
+      'pieczywo',
+      'nabiał',
+      'mięso',
+      'ryby',
+      'słodycze',
+      'napoje',
+      'przyprawy',
+      'chemia',
+      'kosmetyki',
+      'higiena',
+      'inne',
+    ],
     location: 'Łódź',
     name: 'Ogórasy Pierwszej Klasy',
     photoUrl: 'https://zasoby.ekologia.pl/artykulyNew/20982/xxl/shutterstock-497270422_800x600.jpg',
@@ -90,7 +106,6 @@ export const OfferList = () => {
     ) {
       setIsLoading(true);
       setPage((prevPage) => prevPage + 1);
-      console.log(page);
     }
   };
 

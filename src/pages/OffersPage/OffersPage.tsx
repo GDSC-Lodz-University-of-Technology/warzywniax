@@ -10,6 +10,7 @@ import {
 import { MouseEvent, useState } from 'react';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
+import { NavBar } from 'templates/NavBar/NavBar';
 import { OfferList } from './components/OfferList/OfferList';
 import { useTranslation } from 'react-i18next';
 
@@ -52,8 +53,7 @@ export function OffersPage() {
         minHeight: '101vh',
       }}
     >
-      <h1>{t('offers.title')}</h1>
-      {/* <Nav></Nav> */}
+      <NavBar />
       <Box
         sx={{
           alignItems: 'center',
@@ -80,8 +80,6 @@ export function OffersPage() {
         elevation={0}
         sx={{
           borderRadius: 10,
-          display: 'flex',
-          flexWrap: 'wrap',
           mb: 2,
         }}
       >
@@ -109,7 +107,7 @@ export function OffersPage() {
           </ToggleButton>
         </StyledToggleButtonGroup>
       </Paper>
-      <Box width={{ mobile: '95%', tablet: '85%' }}>{view === 'list' && <OfferList />}</Box>
+      <Box width={{ mobile: '95%', tablet: '90%' }}>{view === 'list' && <OfferList />}</Box>
     </Box>
   );
 }
