@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "postinstall": "git config core.hooksPath ./git-hooks",
+    "postinstall": "git config core.hooksPath ./git-hooks && git update-index --assume-unchanged firebase/seed/auth_export/accounts.json firebase/seed/auth_export/config.json firebase/seed/firebase-export-metadata.json firebase/seed/firestore_export/all_namespaces/all_kinds/all_namespaces_all_kinds.export_metadata firebase/seed/firestore_export/all_namespaces/all_kinds/output-0 firebase/seed/firestore_export/firestore_export.overall_export_metadata firebase/seed/storage_export/buckets.json",
     "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
