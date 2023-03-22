@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "postinstall": "git config core.hooksPath ./git-hooks && git update-index --assume-unchanged firebase/seed/auth_export/accounts.json firebase/seed/auth_export/config.json firebase/seed/firebase-export-metadata.json firebase/seed/firestore_export/all_namespaces/all_kinds/all_namespaces_all_kinds.export_metadata firebase/seed/firestore_export/all_namespaces/all_kinds/output-0 firebase/seed/firestore_export/firestore_export.overall_export_metadata firebase/seed/storage_export/buckets.json",
+    "postinstall": "git config core.hooksPath ./git-hooks && npm run git:stop-tracking-db-seed",
     "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
@@ -17,7 +17,8 @@
     "firebase:deploy": "cd firebase && firebase deploy --only storage,firestore:rules,firestore:indexes",
     "firebase:deploy:storage-rules": "cd firebase && firebase deploy --only storage",
     "firebase:deploy:firestore-rules": "cd firebase && firebase deploy --only firestore:rules",
-    "firebase:deploy:firesotre-indexes": "cd firebase && firebase deploy --only firestore:indexes"
+    "firebase:deploy:firesotre-indexes": "cd firebase && firebase deploy --only firestore:indexes",
+    "git:stop-tracking-db-seed": "git update-index --assume-unchanged firebase/seed/auth_export/accounts.json firebase/seed/auth_export/config.json firebase/seed/firebase-export-metadata.json firebase/seed/firestore_export/all_namespaces/all_kinds/all_namespaces_all_kinds.export_metadata firebase/seed/firestore_export/all_namespaces/all_kinds/output-0 firebase/seed/firestore_export/firestore_export.overall_export_metadata firebase/seed/storage_export/buckets.json"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -35,6 +36,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.53.0",

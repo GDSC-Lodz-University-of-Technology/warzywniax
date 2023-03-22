@@ -1,12 +1,4 @@
-import {
-  getRandomDescription,
-  getRandomFirstName,
-  getRandomGeoPoint,
-  getRandomLastName,
-  getRandomPhotoUrl,
-  getRandomProduct,
-  getRandomShopName,
-} from './generateRandomData.utils';
+import { getRandomGeoPoint, getRandomProduct } from './generateRandomData.utils';
 import {
   ShopOwner,
   ShopRecord,
@@ -15,36 +7,32 @@ import { createManyLocations } from '../src/services/FirebaseService/ShopsCollec
 import { createManyProducts } from '../src/services/FirebaseService/ShopsCollection/ProductsService';
 import { createManyShop } from '../src/services/FirebaseService/ShopsCollection/ShopsService';
 import { DocumentReference } from 'firebase/firestore';
+import { faker } from '@faker-js/faker';
 import { generateRandomInteger } from '../src/common/utils/generateRandomInteger';
 import { LocationRecord } from '../src/services/FirebaseService/ShopsCollection/LocationCollection.types';
 import { ProductRecord } from '../src/services/FirebaseService/ShopsCollection/ProductCollection.types';
 
-async function generateRandomOwner(): Promise<ShopOwner> {
+function generateRandomOwner(): ShopOwner {
+  const sex = generateRandomInteger(0, 1) === 1 ? 'male' : 'female';
   return {
-    avatarUrl: await getRandomPhotoUrl(640, 640),
-    firstName: getRandomFirstName(),
-    lastName: getRandomLastName(),
+    avatarUrl: faker.image.people(640, 640, true),
+    firstName: faker.name.firstName(sex),
+    lastName: faker.name.firstName(sex),
   };
 }
 
 export async function generateShopsMock(count = 50): Promise<DocumentReference<ShopRecord>[]> {
   const shops: ShopRecord[] = [];
   for (let i = 0; i < count; i++) {
-    const [shopDescription, locationDescription, shopPhoto, shopOwner] = await Promise.all([
-      getRandomDescription(3),
-      getRandomDescription(),
-      getRandomPhotoUrl(),
-      generateRandomOwner(),
-    ]);
     shops.push({
-      description: shopDescription,
+      description: faker.lorem.paragraph(3),
       mainLocation: {
-        description: locationDescription,
+        description: faker.lorem.sentences(3),
         geoPoint: getRandomGeoPoint(),
-        photoUrl: shopPhoto,
+        photoUrl: faker.image.city(1920, 1080, true),
       },
-      name: getRandomShopName(),
-      owner: shopOwner,
+      name: faker.company.name(),
+      owner: generateRandomOwner(),
     });
   }
   return await createManyShop(shops);
@@ -57,19 +45,15 @@ async function generateProductsMock(
   const products: ProductRecord[] = [];
   for (let i = 0; i < count; i++) {
     const [name, category] = getRandomProduct();
-    const [description, photoUrl] = await Promise.all([
-      getRandomDescription(2),
-      getRandomPhotoUrl(),
-    ]);
     products.push({
       categories: [category],
-      description: description,
+      description: faker.lorem.paragraphs(2),
       name: name,
-      photoUrl: photoUrl,
+      photoUrl: faker.image.food(1920, 1080, true),
       quantityUnit: 'piece',
     });
   }
-  return createManyProducts(shopId, products);
+  return await createManyProducts(shopId, products);
 }
 
 async function generateLocationMock(
@@ -78,17 +62,13 @@ async function generateLocationMock(
 ): Promise<DocumentReference<LocationRecord>[]> {
   const locations: LocationRecord[] = [];
   for (let i = 0; i < count; i++) {
-    const [description, photoUrl] = await Promise.all([
-      getRandomDescription(1),
-      getRandomPhotoUrl(),
-    ]);
     locations.push({
-      description: description,
+      description: faker.lorem.sentences(2),
       geoPoint: getRandomGeoPoint(),
-      photoUrl: photoUrl,
+      photoUrl: faker.image.city(1920, 1080, true),
     });
   }
-  return createManyLocations(shopId, locations);
+  return await createManyLocations(shopId, locations);
 }
 
 export async function addShopsSubCollections(
