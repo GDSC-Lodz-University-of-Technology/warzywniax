@@ -1,4 +1,3 @@
-/// <reference types="vite/client" />
 interface BuiltInEnvVariables {
   readonly MODE: string;
   readonly BASE_URL: string;

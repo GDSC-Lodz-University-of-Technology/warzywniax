@@ -195,5 +195,12 @@
     "no-magic-numbers": "off",
     "@typescript-eslint/no-magic-numbers": "off"
   },
-  "overrides": []
+  "overrides": [
+    {
+      "files": ["**/generateShopsMock.ts"],
+      "rules": {
+        "no-await-in-loop": "off"
+      }
+    }
+  ]
 }
