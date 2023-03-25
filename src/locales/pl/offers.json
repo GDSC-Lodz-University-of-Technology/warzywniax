@@ -1,3 +1,9 @@
 {
-  "title": "Oferty"
+  "title": "Oferty",
+  "list": " ­ Lista",
+  "map": " ­ Mapa",
+  "currency": "PLN",
+  "details": "Szczegóły",
+  "mapButton": "Pokaż na mapie",
+  "photoAlt": "Zdjęcie"
 }

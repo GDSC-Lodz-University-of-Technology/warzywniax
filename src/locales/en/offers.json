@@ -1,3 +1,9 @@
 {
-  "title": "Offers"
+  "title": "Offers",
+  "list": " ­ List",
+  "map": " ­ Map",
+  "currency": "EUR",
+  "details": "Details",
+  "mapButton": "Click for more",
+  "photoAlt": "Photo of"
 }

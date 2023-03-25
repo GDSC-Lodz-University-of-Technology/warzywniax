@@ -1,46 +1,21 @@
-import {
-  Box,
-  Button,
-  Paper,
-  styled,
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
-} from '@mui/material';
-import { MouseEvent, useState } from 'react';
-import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
-import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
+import { Box } from '@mui/material';
 import { NavBar } from 'templates/NavBar/NavBar';
 import { OfferList } from './components/OfferList/OfferList';
-import { useTranslation } from 'react-i18next';
+import { OfferMap } from './components/OfferMap/OfferMap';
+import { OffersPageView } from './components//ViewSwitch/ViewSwitch.types';
+import { useState } from 'react';
+import { ViewSwitch } from './components/ViewSwitch/ViewSwitch';
 
-const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
-  '& .MuiToggleButtonGroup-grouped': {
-    '&.Mui-disabled': {
-      border: 1,
-    },
-    '&:first-of-type': {
-      borderRadius: 20,
-    },
-    '&:not(:first-of-type)': {
-      borderRadius: 20,
-    },
-    border: 0,
-    margin: theme.spacing(0.6),
-    textTransform: 'none',
-  },
-}));
+//import { useTranslation } from 'react-i18next';
+
+export const views = {
+  [OffersPageView.List]: <OfferList />,
+  [OffersPageView.Map]: <OfferMap />,
+};
 
 export function OffersPage() {
-  const [view, setView] = useState('list');
-  const { t } = useTranslation();
-
-  //newView: string | null
-  const handleView = (_event: MouseEvent<HTMLElement>, newView: string) => {
-    if (handleView !== null) {
-      setView(newView);
-    }
-  };
+  const [view, setView] = useState(OffersPageView.List);
+  //const { t } = useTranslation();
 
   return (
     <Box
@@ -54,60 +29,11 @@ export function OffersPage() {
       }}
     >
       <NavBar />
-      <Box
-        sx={{
-          alignItems: 'center',
-          bgcolor: '#11eef0',
-          display: 'flex',
-          height: '400px',
-          justifyContent: 'center',
-          position: 'relative',
-          width: 1,
-        }}
-      >
-        <Button sx={{ width: '50%' }}>Click for more</Button>
-        <Box
-          sx={{
-            background: 'no-repeat bottom url(../../public/offerPageWaves.svg)',
-            bottom: 0,
-            height: '15%',
-            position: 'absolute',
-            width: '100%',
-          }}
-        />
-      </Box>
-      <Paper
-        elevation={0}
-        sx={{
-          borderRadius: 10,
-          mb: 2,
-        }}
-      >
-        <StyledToggleButtonGroup
-          value={view}
-          exclusive
-          onChange={handleView}
-          aria-label='view'
-        >
-          <ToggleButton
-            sx={{ height: '2.5rem', width: '7rem' }}
-            value='list'
-            aria-label='list view'
-          >
-            <FormatListBulletedOutlinedIcon />
-            {t(' ­ List')}
-          </ToggleButton>
-          <ToggleButton
-            sx={{ height: '2.5rem', width: '7rem' }}
-            value='map'
-            aria-label='map view'
-          >
-            <MapOutlinedIcon />
-            <Typography component='span'>{t(' ­ Map')}</Typography>
-          </ToggleButton>
-        </StyledToggleButtonGroup>
-      </Paper>
-      <Box width={{ mobile: '95%', tablet: '90%' }}>{view === 'list' && <OfferList />}</Box>
+      <ViewSwitch
+        view={view}
+        setView={setView}
+      />
+      {views[view]}
     </Box>
   );
 }

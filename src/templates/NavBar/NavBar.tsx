@@ -1,8 +1,9 @@
 import { alpha, styled } from '@mui/material/styles';
 import { AppBar, Box, Fade, InputBase, Toolbar, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { GradientButton } from '../GradientButton/GradientButton';
 import SearchIcon from '@mui/icons-material/Search';
+//import { useTranslation } from 'react-i18next';
 
 const Search = styled('div')(({ theme }) => ({
   '&:hover': {
@@ -49,23 +50,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export const NavBar = () => {
   const [auth, setAuth] = useState(false);
   const [showBar, setShowBar] = useState(true);
-  let lastScrollTop = 0;
+  // const { t } = useTranslation();
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const heightScreen = window.screen.height / 2;
+
+  const scroll = useCallback(() => {
+    const scrollTop = window.pageYOffset;
+    const condition = scrollTop > prevScrollPos && scrollTop > heightScreen;
+
+    setShowBar(!condition);
+    setPrevScrollPos(scrollTop);
+  }, [prevScrollPos, heightScreen]);
 
   useEffect(() => {
-    addEventListener('scroll', Scroll);
-    return () => removeEventListener('scroll', Scroll);
-  }, []);
+    addEventListener('scroll', scroll);
 
-  const Scroll = () => {
-    const ScrollTop = window.pageYOffset;
-
-    if (ScrollTop > lastScrollTop && ScrollTop > 200) {
-      setShowBar(false);
-    } else {
-      setShowBar(true);
-    }
-    lastScrollTop = ScrollTop;
-  };
+    return () => removeEventListener('scroll', scroll);
+  }, [scroll]);
 
   return (
     <Fade in={showBar}>
