@@ -17,8 +17,6 @@ import { Collection } from '../FireBaseService.types';
 import { firebaseDB } from '../firebase.config';
 import { isNullOrUndefined } from '../../../common/utils/isNullOrUndefined';
 import { OfferRecord } from './OffersCollection.types';
-import { ShopRecord } from '../ShopsCollection/ShopsCollection.types';
-import { shopsCollectionRef } from '../ShopsCollection/ShopsService';
 
 export const offersCollectionRef = collection(firebaseDB, Collection.OFFERS);
 
@@ -49,7 +47,7 @@ export async function createManyOffers(
 
 export async function getOffers(
   ...queries: QueryFieldFilterConstraint[]
-): Promise<QuerySnapshot<ShopRecord>> {
-  const shopsQuery = query<ShopRecord>(shopsCollectionRef, ...queries);
+): Promise<QuerySnapshot<OfferRecord>> {
+  const shopsQuery = query<OfferRecord>(offersCollectionRef, ...queries);
   return await getDocs(shopsQuery);
 }
