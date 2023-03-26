@@ -1,9 +1,24 @@
-import { addDoc, collection, doc, DocumentReference, writeBatch } from 'firebase/firestore';
-import { FirestoreError, SetOptions } from '@firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  DocumentReference,
+  getDocs,
+  query,
+  writeBatch,
+} from 'firebase/firestore';
+import {
+  FirestoreError,
+  QueryFieldFilterConstraint,
+  QuerySnapshot,
+  SetOptions,
+} from '@firebase/firestore';
 import { Collection } from '../FireBaseService.types';
 import { firebaseDB } from '../firebase.config';
 import { isNullOrUndefined } from '../../../common/utils/isNullOrUndefined';
 import { OfferRecord } from './OffersCollection.types';
+import { ShopRecord } from '../ShopsCollection/ShopsCollection.types';
+import { shopsCollectionRef } from '../ShopsCollection/ShopsService';
 
 export const offersCollectionRef = collection(firebaseDB, Collection.OFFERS);
 
@@ -30,4 +45,11 @@ export async function createManyOffers(
     console.error(error);
   });
   return createdDocs;
+}
+
+export async function getOffers(
+  ...queries: QueryFieldFilterConstraint[]
+): Promise<QuerySnapshot<ShopRecord>> {
+  const shopsQuery = query<ShopRecord>(shopsCollectionRef, ...queries);
+  return await getDocs(shopsQuery);
 }

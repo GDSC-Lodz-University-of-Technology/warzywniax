@@ -4,7 +4,7 @@ import { createManyOffers } from '../src/services/FirebaseService/OffersCollecti
 import { DocumentDoesntExistsError } from '../src/errors/DocumentDoesntExistsError';
 import { faker } from '@faker-js/faker';
 import { generateRandomInteger } from '../src/common/utils/generateRandomInteger';
-import { getAllShopProducts } from '../src/services/FirebaseService/ShopsCollection/ProductsService';
+import { getProducts } from '../src/services/FirebaseService/ShopsCollection/ProductsService';
 import { isNullOrUndefined } from '../src/common/utils/isNullOrUndefined';
 import { OfferRecord } from '../src/services/FirebaseService/OffersCollection/OffersCollection.types';
 import { ShopRecord } from '../src/services/FirebaseService/ShopsCollection/ShopsCollection.types';
@@ -13,7 +13,7 @@ async function getRandomOffers(
   shopReference: DocumentReference<ShopRecord>
 ): Promise<DocumentReference<OfferRecord>[]> {
   const [products, shopDataSnapshot] = await Promise.all([
-    getAllShopProducts(shopReference),
+    getProducts(shopReference),
     getDoc(shopReference),
   ]);
   const shopData = shopDataSnapshot.data();
