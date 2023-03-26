@@ -6,8 +6,6 @@ import { OffersPageView } from './components//ViewSwitch/ViewSwitch.types';
 import { useState } from 'react';
 import { ViewSwitch } from './components/ViewSwitch/ViewSwitch';
 
-//import { useTranslation } from 'react-i18next';
-
 export const views = {
   [OffersPageView.List]: <OfferList />,
   [OffersPageView.Map]: <OfferMap />,
@@ -15,7 +13,6 @@ export const views = {
 
 export function OffersPage() {
   const [view, setView] = useState(OffersPageView.List);
-  //const { t } = useTranslation();
 
   return (
     <Box

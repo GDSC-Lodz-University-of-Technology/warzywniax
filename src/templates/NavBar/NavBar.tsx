@@ -1,9 +1,10 @@
 import { alpha, styled } from '@mui/material/styles';
 import { AppBar, Box, Fade, InputBase, Toolbar, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { GradientButton } from '../GradientButton/GradientButton';
 import SearchIcon from '@mui/icons-material/Search';
-//import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 const Search = styled('div')(({ theme }) => ({
   '&:hover': {
@@ -50,23 +51,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export const NavBar = () => {
   const [auth, setAuth] = useState(false);
   const [showBar, setShowBar] = useState(true);
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const heightScreen = window.screen.height / 2;
 
-  const scroll = useCallback(() => {
-    const scrollTop = window.pageYOffset;
-    const condition = scrollTop > prevScrollPos && scrollTop > heightScreen;
+  const handleScroll = useCallback(() => {
+    const currScrollPos = window.pageYOffset;
+    const condition = currScrollPos < prevScrollPos || currScrollPos < heightScreen;
 
-    setShowBar(!condition);
-    setPrevScrollPos(scrollTop);
+    setShowBar(condition);
+    setPrevScrollPos(currScrollPos);
   }, [prevScrollPos, heightScreen]);
 
   useEffect(() => {
-    addEventListener('scroll', scroll);
+    addEventListener('scroll', handleScroll);
 
-    return () => removeEventListener('scroll', scroll);
-  }, [scroll]);
+    return () => removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   return (
     <Fade in={showBar}>
@@ -96,19 +97,23 @@ export const NavBar = () => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder='Search…'
               inputProps={{ 'aria-label': 'search' }}
+              placeholder={`${t('navbar.search')}`}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          {auth && <div>User</div>}
+          {auth && (
+            <div>
+              <AccountCircleOutlinedIcon />
+            </div>
+          )}
           <GradientButton
             sx={{ width: '300px' }}
             onClick={() => {
               setAuth(!auth);
             }}
           >
-            {auth ? 'Create an offer' : 'Log in'}
+            {auth ? `${t('navbar.createOffer')}` : `${t('navbar.login')}`}
           </GradientButton>
         </Toolbar>
       </AppBar>
