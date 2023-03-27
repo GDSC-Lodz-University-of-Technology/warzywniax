@@ -8,13 +8,18 @@ import {
   writeBatch,
 } from 'firebase/firestore';
 import { Collection, SubCollection } from '../FireBaseService.types';
-import { FirestoreError, QuerySnapshot, SetOptions } from '@firebase/firestore';
+import {
+  FirestoreError,
+  QueryFieldFilterConstraint,
+  QuerySnapshot,
+  SetOptions,
+} from '@firebase/firestore';
 import { firebaseDB } from '../firebase.config';
 import { isNullOrUndefined } from '../../../common/utils/isNullOrUndefined';
 import { ProductRecord } from './ProductCollection.types';
 import { ShopRecord } from './ShopsCollection.types';
 
-export async function createProduct(
+export async function addProduct(
   parentShop: DocumentReference<ShopRecord>,
   productData: ProductRecord
 ): Promise<DocumentReference<ProductRecord>> {
@@ -48,9 +53,11 @@ export async function createManyProducts(
   return createdDocs;
 }
 
-export async function getAllShopProducts(
-  shop: DocumentReference<ShopRecord>
+export async function getProducts(
+  shop: DocumentReference<ShopRecord>,
+  ...queries: QueryFieldFilterConstraint[]
 ): Promise<QuerySnapshot<ProductRecord>> {
   const productsRef = collection<SubCollection.PRODUCTS>(shop, SubCollection.PRODUCTS);
-  return await getDocs(query(productsRef));
+  const shopsQuery = query<ProductRecord>(productsRef, ...queries);
+  return await getDocs(shopsQuery);
 }
