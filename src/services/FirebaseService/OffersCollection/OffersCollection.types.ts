@@ -12,8 +12,9 @@ export type BaseProductInfo = z.infer<typeof BaseProductInfo>;
 
 export const BaseShopInfo = z.object({
   geoPoint: ZGeoPoint,
-  id: ZDocumentReference,
   name: z.string(),
+  shopId: ZDocumentReference,
+  shopOwnerId: z.string(),
 });
 export type BaseShopInfo = z.infer<typeof BaseShopInfo>;
 
