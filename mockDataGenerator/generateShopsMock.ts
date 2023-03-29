@@ -11,17 +11,30 @@ import { faker } from '@faker-js/faker';
 import { generateRandomInteger } from '../src/common/utils/generateRandomInteger';
 import { LocationRecord } from '../src/services/FirebaseService/ShopsCollection/LocationCollection.types';
 import { ProductRecord } from '../src/services/FirebaseService/ShopsCollection/ProductCollection.types';
+import { User } from 'firebase/auth';
 
-function generateRandomOwner(): ShopOwner {
+function generateRandomOwner(shopOwnerId: string): ShopOwner {
   const sex = generateRandomInteger(0, 1) === 1 ? 'male' : 'female';
   return {
     avatarUrl: faker.image.people(640, 640, true),
     firstName: faker.name.firstName(sex),
     lastName: faker.name.firstName(sex),
+    shopOwnerId: shopOwnerId,
   };
 }
 
-export async function generateShopsMock(count = 50): Promise<DocumentReference<ShopRecord>[]> {
+export async function generateShopsMock(
+  users: User[],
+  [minShops, maxShops]: [number, number]
+): Promise<DocumentReference<ShopRecord>[]> {
+  const shopsToCreate: Array<ShopRecord[]> = [];
+  for (const user of users) {
+    shopsToCreate.push(createShopsMockForUser(user.uid, generateRandomInteger(minShops, maxShops)));
+  }
+  return await createManyShop(shopsToCreate.flat());
+}
+
+function createShopsMockForUser(shopOwnerId: string, count: number): ShopRecord[] {
   const shops: ShopRecord[] = [];
   for (let i = 0; i < count; i++) {
     shops.push({
@@ -32,10 +45,10 @@ export async function generateShopsMock(count = 50): Promise<DocumentReference<S
         photoUrl: faker.image.city(1920, 1080, true),
       },
       name: faker.company.name(),
-      owner: generateRandomOwner(),
+      owner: generateRandomOwner(shopOwnerId),
     });
   }
-  return await createManyShop(shops);
+  return shops;
 }
 
 async function generateProductsMock(
@@ -73,8 +86,8 @@ async function generateLocationMock(
 
 export async function addShopsSubCollections(
   createdShops: DocumentReference<ShopRecord>[],
-  [minProducts, maxProducts] = [1, 10],
-  [minLocations, maxLocations] = [0, 10]
+  [minProducts, maxProducts]: [number, number],
+  [minLocations, maxLocations]: [number, number]
 ): Promise<void> {
   const productsToAdd: Array<Promise<DocumentReference<ProductRecord>[]>> = [];
   const locationsToAdd: Array<Promise<DocumentReference<LocationRecord>[]>> = [];
