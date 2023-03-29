@@ -5,6 +5,7 @@ export const ShopOwner = z.object({
   avatarUrl: z.string(),
   firstName: z.string(),
   lastName: z.string(),
+  shopOwnerId: z.string(),
 });
 export type ShopOwner = z.infer<typeof ShopOwner>;
 
