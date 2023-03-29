@@ -32,8 +32,9 @@ async function getRandomOffers(
       },
       baseShopInfo: {
         geoPoint: shopData.mainLocation.geoPoint,
-        id: shopReference,
         name: shopData.name,
+        shopId: shopReference,
+        shopOwnerId: shopData.owner.shopOwnerId,
       },
       description: faker.lorem.paragraphs(2),
       productsInOffer: generateRandomInteger(1, 100),
