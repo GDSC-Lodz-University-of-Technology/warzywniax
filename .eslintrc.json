@@ -19,7 +19,8 @@
   },
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "plugins": ["@typescript-eslint", "prettier", "import", "react", "react-hooks"],
   "extends": [

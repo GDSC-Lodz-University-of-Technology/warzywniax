@@ -34,6 +34,7 @@ buildcache/
 # Other
 node_modules
 dist
+jest_cache
 /firebase/seed
 dist-ssr
 *.local
