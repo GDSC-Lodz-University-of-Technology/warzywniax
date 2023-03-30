@@ -1,8 +1,46 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    function isUserSignedIn() {
+      return request.auth.uid != null;
+    }
+
     match /{document=**} {
       allow read, write: if false;
+    }
+    match /shops/{shop} {
+      function isShopOwner() {
+        return get(/databases/$(database)/documents/shops/$(shop)).data.owner.id == request.auth.uid;
+      }
+      function canModifyShopDocument() {
+        return request.resource.data.owner.id == request.auth.uid;
+      }
+
+      allow read;
+      allow create: if isUserSignedIn();
+      allow update, delete: if canModifyShopDocument();
+
+      match /products/{product} {
+        allow read;
+        allow write: if isShopOwner();
+
+      }
+      match /locations/{location} {
+        allow read;
+        allow write: if isShopOwner();
+      }
+    }
+    match /offers/{offer} {
+      function isOfferOwner() {
+        return resource.data.baseShopInfo.shopOwnerId == request.auth.uid;
+      }
+      function canCreateOffer() {
+        return request.resource.data.baseShopInfo.shopOwnerId == request.auth.uid;
+      }
+
+      allow read;
+      allow create: if canCreateOffer();
+      allow update, delete: if isOfferOwner();
     }
   }
 }
