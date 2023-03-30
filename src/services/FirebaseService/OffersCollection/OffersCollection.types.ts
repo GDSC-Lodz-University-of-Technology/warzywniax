@@ -5,6 +5,7 @@ import { z } from 'zod';
 export const BaseProductInfo = z.object({
   categories: z.array(ProductCategoryEnum),
   id: ZDocumentReference,
+  name: z.string(),
   photoUrl: z.string(),
   quantityUnit: z.string(),
 });

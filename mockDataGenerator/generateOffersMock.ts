@@ -27,6 +27,7 @@ async function getRandomOffers(
       baseProductInfo: {
         categories: productData.categories,
         id: product.ref,
+        name: productData.name,
         photoUrl: productData.photoUrl,
         quantityUnit: productData.quantityUnit,
       },

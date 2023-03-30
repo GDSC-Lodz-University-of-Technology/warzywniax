@@ -1,7 +1,9 @@
 import { Box } from '@mui/material';
+import { OfferTagsProps } from './OfferTgas.types';
 import { TagButton } from './OfferTags.styled';
+import { translateCategory } from '../../../../common/utils/translateCategory';
 
-export const OfferTags = ({ categories }: { categories: string[] }) => (
+export const OfferTags = ({ categories }: OfferTagsProps) => (
   <Box
     sx={{
       '&::-webkit-scrollbar': {
@@ -14,7 +16,7 @@ export const OfferTags = ({ categories }: { categories: string[] }) => (
     }}
   >
     {categories.map((category) => (
-      <TagButton key={category}>{category}</TagButton>
+      <TagButton key={category}>{translateCategory(category)}</TagButton>
     ))}
   </Box>
 );

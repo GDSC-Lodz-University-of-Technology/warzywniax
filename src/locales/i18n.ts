@@ -2,6 +2,8 @@ import * as navbarEN from './en/navbar.json';
 import * as navbarPL from './pl/navbar.json';
 import * as offersEN from './en/offers.json';
 import * as offersPL from './pl/offers.json';
+import * as productsEN from './en/products-categories.json';
+import * as productsPL from './pl/products-categories.json';
 import * as shopsEN from './en/shops.json';
 import * as shopsPL from './pl/shops.json';
 import i18n from 'i18next';
@@ -12,6 +14,7 @@ const resources = {
     components: {
       navbar: navbarEN,
       offers: offersEN,
+      products: productsEN,
       shops: shopsEN,
     },
   },
@@ -19,6 +22,7 @@ const resources = {
     components: {
       navbar: navbarPL,
       offers: offersPL,
+      products: productsPL,
       shops: shopsPL,
     },
   },

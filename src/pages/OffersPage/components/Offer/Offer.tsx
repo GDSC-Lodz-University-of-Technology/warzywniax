@@ -7,17 +7,9 @@ import { OfferTags } from '../OfferTags/OfferTags';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'react-i18next';
 
-export const Offer: FC<IOfferProps> = ({
-  categories,
-  name,
-  location,
-  photoUrl,
-  quantityUnit,
-  shopName,
-  unitPrice,
-}) => {
+export const Offer: FC<IOfferProps> = ({ data }) => {
   const { t } = useTranslation();
-
+  const { baseProductInfo, baseShopInfo, ...offerData } = data.data();
   return (
     <Card
       sx={{
@@ -34,8 +26,9 @@ export const Offer: FC<IOfferProps> = ({
       <CardMedia
         component='img'
         sx={{ alignSelf: 'center', borderRadius: '32px', height: '224px', width: '224px' }}
-        image={photoUrl}
-        alt={`${t('offers.photoAlt')} ${name}`}
+        image={baseProductInfo.photoUrl}
+        crossOrigin={'anonymous'}
+        alt={`${t('offers.photoAlt')} ${baseProductInfo.name}`}
       />
       <Box sx={{ display: 'flex', flexDirection: 'column', width: 'calc(100% - 224px)' }}>
         <CardContent
@@ -50,8 +43,8 @@ export const Offer: FC<IOfferProps> = ({
         >
           <div>
             <Box sx={{ display: 'flex', height: '24px', justifyContent: 'space-between' }}>
-              <OfferTags categories={categories} />
-              <LocationMark location={location} />
+              <OfferTags categories={baseProductInfo.categories} />
+              <LocationMark geoPoint={baseShopInfo.geoPoint} />
             </Box>
             <Typography
               component='div'
@@ -59,7 +52,7 @@ export const Offer: FC<IOfferProps> = ({
               fontWeight='600'
               noWrap
             >
-              {name}
+              {baseProductInfo.name}
             </Typography>
             <Typography
               variant='subtitle1'
@@ -68,7 +61,7 @@ export const Offer: FC<IOfferProps> = ({
               component='div'
               sx={{ overflowX: 'hidden' }}
             >
-              {shopName}
+              {baseShopInfo.name}
             </Typography>
           </div>
           <Box
@@ -84,7 +77,7 @@ export const Offer: FC<IOfferProps> = ({
               component='div'
               sx={{ fontSize: '2.5rem', lineHeight: 0 }}
             >
-              {unitPrice}
+              {offerData.unitPrice}
             </Typography>
             <Typography
               variant='h6'
@@ -92,7 +85,7 @@ export const Offer: FC<IOfferProps> = ({
               color='text.secondary'
               component='div'
             >
-              {`${t('offers.currency')} /${quantityUnit}`}
+              {`${t('offers.currency')} /${baseProductInfo.quantityUnit}`}
             </Typography>
           </Box>
         </CardContent>
