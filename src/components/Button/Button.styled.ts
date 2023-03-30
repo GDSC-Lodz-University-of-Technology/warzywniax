@@ -6,7 +6,7 @@ const BaseLayoutButton = styled(MuiButton)<{ isLoading: boolean | undefined }>(
       background: theme.palette.mainGradient,
     },
     alignItems: 'center',
-    borderRadius: '20px',
+    borderRadius: '12px',
     borderWidth: '2px',
     fontSize: '1rem',
     fontWeight: 700,

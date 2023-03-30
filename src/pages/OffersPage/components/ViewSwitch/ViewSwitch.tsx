@@ -1,26 +1,10 @@
 import { FC, MouseEvent } from 'react';
 import { IViewSwitchProps, OffersPageView } from './ViewSwitch.types';
-import { Paper, styled, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { Paper, ToggleButton, Typography } from '@mui/material';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
+import { StyledToggleButtonGroup } from './ViewSwitch.styled';
 import { useTranslation } from 'react-i18next';
-
-const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
-  '& .MuiToggleButtonGroup-grouped': {
-    '&.Mui-disabled': {
-      border: 1,
-    },
-    '&:first-of-type': {
-      borderRadius: 20,
-    },
-    '&:not(:first-of-type)': {
-      borderRadius: 20,
-    },
-    border: 0,
-    margin: theme.spacing(0.6),
-    textTransform: 'none',
-  },
-}));
 
 export const ViewSwitch: FC<IViewSwitchProps> = ({ view, setView }) => {
   const { t } = useTranslation();
@@ -34,8 +18,9 @@ export const ViewSwitch: FC<IViewSwitchProps> = ({ view, setView }) => {
       elevation={0}
       sx={{
         borderRadius: 10,
-        bottom: '0.75rem',
-        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.15)',
+        bottom: '10px',
+        boxShadow: 'none',
+        filter: 'drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.15))',
         position: 'fixed',
         zIndex: 1,
       }}
@@ -47,7 +32,7 @@ export const ViewSwitch: FC<IViewSwitchProps> = ({ view, setView }) => {
         aria-label='view'
       >
         <ToggleButton
-          sx={{ height: '2.5rem', width: '7rem' }}
+          sx={{ height: '40px', width: '120px' }}
           value={OffersPageView.List}
           aria-label='list view'
         >
@@ -55,7 +40,7 @@ export const ViewSwitch: FC<IViewSwitchProps> = ({ view, setView }) => {
           {t('offers.list')}
         </ToggleButton>
         <ToggleButton
-          sx={{ height: '2.5rem', width: '7rem' }}
+          sx={{ height: '40px', width: '120px' }}
           value={OffersPageView.Map}
           aria-label='map view'
         >

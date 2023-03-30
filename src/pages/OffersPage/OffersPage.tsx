@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { NavBar } from 'templates/NavBar/NavBar';
 import { OfferList } from './components/OfferList/OfferList';
 import { OfferMap } from './components/OfferMap/OfferMap';
@@ -13,13 +13,14 @@ export const views = {
 
 export function OffersPage() {
   const [view, setView] = useState(OffersPageView.List);
+  const theme = useTheme();
 
   return (
     <Box
       component='main'
       sx={{
         alignItems: 'center',
-        backgroundColor: '#F7F8F9',
+        backgroundColor: theme.palette.background.default,
         display: 'flex',
         flexDirection: 'column',
         minHeight: '101vh',

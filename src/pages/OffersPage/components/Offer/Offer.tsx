@@ -1,6 +1,6 @@
 import { Box, Card, CardActions, CardContent, CardMedia } from '@mui/material';
+import { Button } from '../../../../components/Button/Button';
 import { FC } from 'react';
-import { GradientButton } from '../../../../templates/GradientButton/GradientButton';
 import { IOfferProps } from './Offer.types';
 import { LocationMark } from '../LocationMark/LocationMark';
 import { OfferTags } from '../OfferTags/OfferTags';
@@ -21,10 +21,11 @@ export const Offer: FC<IOfferProps> = ({
   return (
     <Card
       sx={{
-        borderRadius: '25% 0.5rem 0.5rem 25%',
-        boxShadow: '4px 4px 10px rgba(0, 0, 0, 0.15)',
+        borderRadius: '25% 8px 8px 25%',
+        boxShadow: 'none',
         display: 'flex',
-        height: '13rem',
+        filter: 'drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.15))',
+        height: '208px',
         my: 2,
         overflow: 'visible',
         width: 1,
@@ -32,11 +33,11 @@ export const Offer: FC<IOfferProps> = ({
     >
       <CardMedia
         component='img'
-        sx={{ alignSelf: 'center', borderRadius: '2rem', height: '14rem', width: '14rem' }}
+        sx={{ alignSelf: 'center', borderRadius: '32px', height: '224px', width: '224px' }}
         image={photoUrl}
         alt={`${t('offers.photoAlt')} ${name}`}
       />
-      <Box sx={{ display: 'flex', flexDirection: 'column', width: 'calc(100% - 14rem)' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', width: 'calc(100% - 224px)' }}>
         <CardContent
           sx={{
             display: 'flex',
@@ -96,7 +97,7 @@ export const Offer: FC<IOfferProps> = ({
           </Box>
         </CardContent>
         <CardActions sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
-          <GradientButton sx={{ width: 2 / 3 }}>{t('offers.details')}</GradientButton>
+          <Button sx={{ height: '36px', width: 2 / 3 }}>{t('offers.details')}</Button>
         </CardActions>
       </Box>
     </Card>

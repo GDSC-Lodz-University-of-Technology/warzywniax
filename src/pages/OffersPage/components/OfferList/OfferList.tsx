@@ -1,4 +1,4 @@
-import { Box, Button, LinearProgress } from '@mui/material';
+import { Box, Button, LinearProgress, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import { IOfferProps } from '../Offer/Offer.types';
@@ -94,6 +94,7 @@ export const OfferList = () => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
+  const theme = useTheme();
 
   useEffect(() => {
     const response = datalist;
@@ -173,9 +174,9 @@ export const OfferList = () => {
             <LinearProgress
               sx={{
                 '& .MuiLinearProgress-bar': {
-                  backgroundColor: '#fff',
+                  backgroundColor: theme.palette.common.white,
                 },
-                backgroundColor: '#C8C8C9',
+                backgroundColor: theme.palette.text.label,
               }}
             />
           </Box>
