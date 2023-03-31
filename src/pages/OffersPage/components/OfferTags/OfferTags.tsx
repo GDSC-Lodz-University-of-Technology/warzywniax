@@ -11,7 +11,7 @@ export const OfferTags = ({ categories }: OfferTagsProps) => (
       },
       display: 'flex',
       gap: '6px',
-      overflowX: 'scroll',
+      overflowX: 'auto',
       overflowY: 'hidden',
     }}
   >

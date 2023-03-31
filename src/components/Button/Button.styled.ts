@@ -2,6 +2,15 @@ import { Button as MuiButton, styled } from '@mui/material';
 
 const BaseLayoutButton = styled(MuiButton)<{ isLoading: boolean | undefined }>(
   ({ theme, isLoading }) => ({
+    '& .MuiButton-startIcon': {
+      '& > img': {
+        height: '30px',
+        objectFit: 'contain',
+        width: 'auto',
+      },
+
+      height: '100%',
+    },
     '&:hover, &:target': {
       background: theme.palette.mainGradient,
     },
