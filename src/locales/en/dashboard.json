@@ -1,0 +1,20 @@
+{
+  "user": {
+    "header": "User information",
+    "title": "User Profile",
+    "name": "Name",
+    "surname": "Surname",
+    "email": "E-mail",
+    "accountType": "Account type",
+    "accountTypeUser": "User",
+    "accountTypeVendor": "Vendor",
+    "password": "Password",
+    "save": "Save changes"
+  },
+  "shop": {
+    "name": "Shop name",
+    "description": "Shop description",
+    "location": "Shop location",
+    "save": "Save changes"
+  }
+}
