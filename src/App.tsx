@@ -29,6 +29,22 @@ export function App() {
             Shops
           </Link>
         </li>
+        <li>
+          <Link
+            component={RouterLink}
+            to='/login'
+          >
+            Login
+          </Link>
+        </li>
+        <li>
+          <Link
+            component={RouterLink}
+            to='/register'
+          >
+            Register
+          </Link>
+        </li>
       </ul>
     </nav>
   );

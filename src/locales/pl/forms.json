@@ -1,0 +1,9 @@
+{
+  "formErrors": {
+    "general": "Coś jest nie tak",
+    "required": "To pole jest wymagane",
+    "email": "Wpisz poprawny adres e-mail",
+    "minCharacters": "Wprowadź co najmniej 6 znaków",
+    "passwordsDontMatch": "Hasła nie są takie same"
+  }
+}

@@ -1,3 +1,7 @@
+import * as authEN from './en/auth.json';
+import * as authPL from './pl/auth.json';
+import * as formsEN from './en/forms.json';
+import * as formsPL from './pl/forms.json';
 import * as navbarEN from './en/navbar.json';
 import * as navbarPL from './pl/navbar.json';
 import * as offersEN from './en/offers.json';
@@ -12,6 +16,8 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     components: {
+      auth: authEN,
+      forms: formsEN,
       navbar: navbarEN,
       offers: offersEN,
       products: productsEN,
@@ -20,6 +26,8 @@ const resources = {
   },
   pl: {
     components: {
+      auth: authPL,
+      forms: formsPL,
       navbar: navbarPL,
       offers: offersPL,
       products: productsPL,
