@@ -1,16 +1,12 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { RegisterFormData, registerFormSchema } from './RegisterForm.types';
+import { FormProvider, useForm } from 'react-hook-form';
+import { RegisterFormData, RegisterFormProps, registerFormSchema } from './RegisterForm.types';
 import { AuthFormWrapper } from 'pages/AuthPage/components/AuthFormWrapper/AuthFormWrappper';
 import { Button } from 'components/Button/Button';
 import { FormInput } from 'components/Form/FormInput/FormInput';
 import { Stack } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-type RegisterFormProps = {
-  onFormSubmit: SubmitHandler<RegisterFormData>;
-};
 
 export const RegisterForm = ({ onFormSubmit }: RegisterFormProps) => {
   const { t } = useTranslation();

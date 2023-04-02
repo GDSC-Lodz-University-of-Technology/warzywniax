@@ -1,11 +1,8 @@
 import { AuthProvider } from 'services/FirebaseService/AuthService/AuthService.types';
 import { Box } from '@mui/material';
 import { Button } from 'components/Button/Button';
+import { SignInProvidersBoxProps } from './SignInProvidersBox.types';
 import { useTranslation } from 'react-i18next';
-
-type SignInProvidersBoxProps = {
-  handleProviderButtonClick: (provider: AuthProvider) => void;
-};
 
 const providers = [
   {

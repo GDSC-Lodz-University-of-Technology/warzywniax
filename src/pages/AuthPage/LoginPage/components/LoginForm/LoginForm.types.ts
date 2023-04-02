@@ -1,4 +1,6 @@
 /* eslint-disable camelcase */
+import { AuthProvider } from 'services/FirebaseService/AuthService/AuthService.types';
+import { SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 
 export const loginFormSchema = z.object({
@@ -7,3 +9,8 @@ export const loginFormSchema = z.object({
 });
 
 export type LoginFormData = z.infer<typeof loginFormSchema>;
+
+export type LoginFormProps = {
+  onFormSubmit: SubmitHandler<LoginFormData>;
+  handleExternalProviderLogin: (provider: AuthProvider) => void;
+};

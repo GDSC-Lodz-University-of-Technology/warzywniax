@@ -1,19 +1,13 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Chip, Divider, Stack } from '@mui/material';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { LoginFormData, loginFormSchema } from './LoginForm.types';
+import { FormProvider, useForm } from 'react-hook-form';
+import { LoginFormData, LoginFormProps, loginFormSchema } from './LoginForm.types';
 import { AuthFormWrapper } from 'pages/AuthPage/components/AuthFormWrapper/AuthFormWrappper';
-import { AuthProvider } from 'services/FirebaseService/AuthService/AuthService.types';
 import { Button } from 'components/Button/Button';
 import { FormInput } from 'components/Form/FormInput/FormInput';
 import { SignInProvidersBox } from '../SignInProvidersBox/SignInProvidersBox';
 import { useTranslation } from 'react-i18next';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-type LoginFormProps = {
-  onFormSubmit: SubmitHandler<LoginFormData>;
-  handleExternalProviderLogin: (provider: AuthProvider) => void;
-};
 
 export const LoginForm = ({ onFormSubmit, handleExternalProviderLogin }: LoginFormProps) => {
   const { t } = useTranslation();

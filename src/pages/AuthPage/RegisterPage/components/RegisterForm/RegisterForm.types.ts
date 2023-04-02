@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 
 export const registerFormSchema = z
@@ -16,3 +17,7 @@ export const registerFormSchema = z
   });
 
 export type RegisterFormData = z.infer<typeof registerFormSchema>;
+
+export type RegisterFormProps = {
+  onFormSubmit: SubmitHandler<RegisterFormData>;
+};
