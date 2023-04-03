@@ -1,32 +1,31 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardContent, Stack, Typography } from '@mui/material';
 import { DashboardPanelProps } from './DashboardPanel.types';
 
-export function DashboardPanel({ imageUrl, title, header, cards }: DashboardPanelProps) {
+export function DashboardPanel({ title, header, headerButton, cards }: DashboardPanelProps) {
   return (
-    <>
-      <Typography variant='h3'> {title} </Typography>
+    <Stack
+      spacing={2}
+      py={2}
+    >
+      <Stack
+        direction='row'
+        justifyContent='space-between'
+        alignItems='center'
+      >
+        <Typography variant='h3'> {title} </Typography>
+        {headerButton}
+      </Stack>
       <Card
         sx={{
-          borderRadius: '25% 8px 8px 25%',
-          boxShadow: 'none',
-          display: 'flex',
-          filter: 'drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.15))',
-          height: '416px',
-          my: 2,
-          overflow: 'visible',
-          width: 1,
+          px: 8,
+          py: 3,
         }}
       >
-        <CardMedia
-          sx={{ alignSelf: 'center', borderRadius: '32px', height: '448px', width: '448px' }}
-          component='img'
-          src={imageUrl}
-        ></CardMedia>
         <CardContent>
           <Typography variant='h5'> {header} </Typography>
           {cards}
         </CardContent>
       </Card>
-    </>
+    </Stack>
   );
 }
