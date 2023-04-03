@@ -3,8 +3,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { BaseLayout } from 'templates/BaseLayout/BaseLayout';
 import { Button } from 'components/Button/Button';
 import { createUser } from 'services/FirebaseService/AuthService/AuthService';
-import { RegisterForm } from './components/RegisterForm';
-import { RegisterFormData } from './components/RegisterForm.types';
+import { RegisterForm } from './components/RegisterForm/RegisterForm';
+import { RegisterFormData } from './components/RegisterForm/RegisterForm.types';
 import { SubmitHandler } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
@@ -30,8 +30,8 @@ export const RegisterPage = () => {
         flexDirection: 'column',
         justifyContent: 'flex-start',
         position: 'relative',
-        pt: { desktop: 5, mobile: 2 },
-        px: { desktop: 23, mobile: 5 },
+        px: { desktop: 23, mobile: 2 },
+        py: { desktop: 5, mobile: 2 },
       }}
       isLoading={isLoading}
     >

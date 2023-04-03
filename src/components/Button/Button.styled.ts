@@ -4,11 +4,10 @@ const BaseLayoutButton = styled(MuiButton)<{ isLoading: boolean | undefined }>(
   ({ theme, isLoading }) => ({
     '& .MuiButton-startIcon': {
       '& > img': {
-        height: '30px',
+        height: '20px',
         objectFit: 'contain',
         width: 'auto',
       },
-
       height: '100%',
     },
     '&:hover, &:target': {
