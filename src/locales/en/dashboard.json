@@ -11,6 +11,7 @@
   },
   "shop": {
     "header": "Shop information",
+    "title": "User Shops",
     "new": { "label": "Create new shop" },
     "name": { "label": "Name", "placeholder": "Shop name" },
     "description": { "label": "Description", "placeholder": "Shop description" },

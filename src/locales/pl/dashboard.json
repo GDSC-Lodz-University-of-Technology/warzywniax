@@ -17,7 +17,7 @@
     "new": { "title": "Utwórz nowy sklep" },
     "name": { "label": "Nazwa sklepu", "placeholder": "Podaj nazwę sklepu" },
     "description": { "label": "Opis sklepu", "placeholder": "Podaj opis sklepu" },
-    "location": { "label": "Lokalizacja", "placeholder": "Podaj lokalizację" },
+    "location": { "label": "Lokacja", "placeholder": "Podaj opis lokacji" },
     "save": { "label": "Zapisz zmiany" }
   }
 }

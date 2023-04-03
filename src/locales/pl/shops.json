@@ -9,6 +9,6 @@
       "label": "Opis głównej lokacji",
       "placeholder": "Al. Jerozolimskie 21, Warszawa"
     },
-    "save": { "label": "Zapisz" }
+    "create": { "label": "Stwórz" }
   }
 }
