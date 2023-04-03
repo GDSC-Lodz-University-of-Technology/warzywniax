@@ -12,6 +12,7 @@ import {
   QueryFieldFilterConstraint,
   QuerySnapshot,
   SetOptions,
+  updateDoc,
 } from '@firebase/firestore';
 import { Collection } from '../FireBaseService.types';
 import { firebaseDB } from '../firebase.config';
@@ -43,6 +44,11 @@ export async function createManyShop(
     console.error(error);
   });
   return createdDocs;
+}
+
+export async function updateShop(shopId: string, shop: ShopRecord) {
+  const shopRef = doc(firebaseDB, Collection.SHOPS, shopId);
+  await updateDoc(shopRef, shop);
 }
 
 export async function getShops(
