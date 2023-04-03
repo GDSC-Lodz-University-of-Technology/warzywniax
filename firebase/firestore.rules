@@ -10,10 +10,10 @@ service cloud.firestore {
     }
     match /shops/{shop} {
       function isShopOwner() {
-        return get(/databases/$(database)/documents/shops/$(shop)).data.owner.id == request.auth.uid;
+        return get(/databases/$(database)/documents/shops/$(shop)).data.owner.shopOwnerId == request.auth.uid;
       }
       function canModifyShopDocument() {
-        return request.resource.data.owner.id == request.auth.uid;
+        return request.resource.data.owner.shopOwnerId == request.auth.uid;
       }
 
       allow read;
