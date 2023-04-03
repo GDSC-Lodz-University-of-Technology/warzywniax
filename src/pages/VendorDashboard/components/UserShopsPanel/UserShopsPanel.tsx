@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Box, LinearProgress, Stack, Typography, useTheme } from '@mui/material';
 import { Button } from 'components/Button/Button';
 import { Collection } from 'services/FirebaseService/FireBaseService.types';
@@ -38,11 +37,11 @@ function UserShops({ user }: UserShopsPanelProps) {
     );
   }
 
-  return shops?.empty ? (
+  return !shops || shops.empty ? (
     <Typography>{t('dashboard.shop.empty')}</Typography>
   ) : (
     <Stack spacing={3}>
-      {shops?.docs.map((shop) => (
+      {shops.docs.map((shop) => (
         <UserShopInfo
           shop={shop}
           key={shop.id}
