@@ -1,19 +1,8 @@
 {
-  "user": {
-    "header": "Informacje Użytkownika",
-    "title": "Profil Użytkownika",
-    "name": { "label": "Imię", "placeholder": "Imię" },
-    "surname": { "label": "Nazwisko", "placeholder": "Nazwisko" },
-    "email": { "label": "Email", "placeholder": "Email" },
-    "accountType": {
-      "label": "Typ konta",
-      "options": { "user": "Użytkownik", "vendor": "Sprzedawca" }
-    },
-    "password": { "label": "Hasło", "placeholder": "Hasło" },
-    "save": { "label": "Zapisz zmiany" }
-  },
   "shop": {
     "header": "Informacje Sklepu",
+    "title": "Profil Sklepu",
+    "empty": "Nie masz jeszcze żadnego sklepu",
     "new": { "title": "Utwórz nowy sklep" },
     "name": { "label": "Nazwa sklepu", "placeholder": "Podaj nazwę sklepu" },
     "description": { "label": "Opis sklepu", "placeholder": "Podaj opis sklepu" },

@@ -1,17 +1,8 @@
 {
-  "user": {
-    "header": "User information",
-    "title": "User Profile",
-    "name": { "label": "Name", "placeholder": "Your name" },
-    "surname": { "label": "Surname", "placeholder": "Your surname" },
-    "email": { "label": "Email", "placeholder": "Your email" },
-    "accountType": { "label": "Account type", "options": { "user": "User", "vendor": "Vendor" } },
-    "password": { "label": "Password", "placeholder": "Your password" },
-    "save": { "label": "Save changes" }
-  },
   "shop": {
     "header": "Shop information",
     "title": "User Shops",
+    "empty": "You don't have any shops yet",
     "new": { "label": "Create new shop" },
     "name": { "label": "Name", "placeholder": "Shop name" },
     "description": { "label": "Description", "placeholder": "Shop description" },
