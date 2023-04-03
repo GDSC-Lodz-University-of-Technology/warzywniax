@@ -59,3 +59,7 @@ export async function signOutUser() {
     throw new AuthError(`Couldn't sign out user.`, error);
   });
 }
+
+export function getAuthUser() {
+  return firebaseAuth.currentUser;
+}
