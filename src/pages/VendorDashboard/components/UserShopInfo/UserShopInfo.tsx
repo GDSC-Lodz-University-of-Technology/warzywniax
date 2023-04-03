@@ -59,7 +59,7 @@ export function UserShopInfo({ shop }: UserShopInfoProps) {
             justifyContent='right'
           >
             <Button
-              disabled={isLoading && !formMethods.formState.isDirty}
+              disabled={isLoading || !formMethods.formState.isDirty}
               isLoading={isLoading}
               type='submit'
             >
