@@ -53,6 +53,14 @@ export function App() {
             Dashboard
           </Link>
         </li>
+        <li>
+          <Link
+            component={RouterLink}
+            to='/shops/new'
+          >
+            Create new shop
+          </Link>
+        </li>
       </ul>
     </nav>
   );

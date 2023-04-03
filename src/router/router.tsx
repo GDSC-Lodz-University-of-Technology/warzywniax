@@ -2,7 +2,7 @@ import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import { App } from '../App';
 import { authRoutes } from './auth.route';
 import { offersRoute } from './offers.route';
-import { shopsRoute } from './shops.route';
+import { shopRoutes } from './shops.route';
 import { vendorDashboardRoute } from './vendorDashboard.route';
 
 const rootRoute: RouteObject = {
@@ -13,7 +13,7 @@ const rootRoute: RouteObject = {
 export const router = createBrowserRouter([
   rootRoute,
   offersRoute,
-  shopsRoute,
   vendorDashboardRoute,
+  ...shopRoutes,
   ...authRoutes,
 ]);
