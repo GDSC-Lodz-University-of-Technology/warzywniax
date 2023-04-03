@@ -1,3 +1,11 @@
 {
-  "title": "Shops"
+  "title": "Shops",
+  "create": {
+    "header": "Create a shop",
+    "title": "Shop Details",
+    "name": { "label": "Shop Name", "placeholder": "Shop Name" },
+    "description": { "label": "Description", "placeholder": "Description" },
+    "mainLocation": { "label": "Main Location Description", "placeholder": "615 Magnolia Bvd, CA" },
+    "save": { "label": "Save" }
+  }
 }

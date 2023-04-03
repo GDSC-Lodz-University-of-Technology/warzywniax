@@ -2,19 +2,19 @@
   "user": {
     "header": "User information",
     "title": "User Profile",
-    "name": "Name",
-    "surname": "Surname",
-    "email": "E-mail",
-    "accountType": "Account type",
-    "accountTypeUser": "User",
-    "accountTypeVendor": "Vendor",
-    "password": "Password",
-    "save": "Save changes"
+    "name": { "label": "Name", "placeholder": "Your name" },
+    "surname": { "label": "Surname", "placeholder": "Your surname" },
+    "email": { "label": "Email", "placeholder": "Your email" },
+    "accountType": { "label": "Account type", "options": { "user": "User", "vendor": "Vendor" } },
+    "password": { "label": "Password", "placeholder": "Your password" },
+    "save": { "label": "Save changes" }
   },
   "shop": {
-    "name": "Shop name",
-    "description": "Shop description",
-    "location": "Shop location",
-    "save": "Save changes"
+    "header": "Shop information",
+    "new": { "label": "Create new shop" },
+    "name": { "label": "Name", "placeholder": "Shop name" },
+    "description": { "label": "Description", "placeholder": "Shop description" },
+    "location": { "label": "Location", "placeholder": "Shop location" },
+    "save": { "label": "Save changes" }
   }
 }

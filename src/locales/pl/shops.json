@@ -1,3 +1,14 @@
 {
-  "title": "Sklepy"
+  "title": "Sklepy",
+  "create": {
+    "header": "Utwórz sklep",
+    "title": "Dane sklepu",
+    "name": { "label": "Nazwa sklepu", "placeholder": "Nazwa sklepu" },
+    "description": { "label": "Opis", "placeholder": "Opis" },
+    "mainLocation": {
+      "label": "Opis głównej lokacji",
+      "placeholder": "Al. Jerozolimskie 21, Warszawa"
+    },
+    "save": { "label": "Zapisz" }
+  }
 }
