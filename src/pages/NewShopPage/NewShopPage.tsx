@@ -16,6 +16,11 @@ export const NewShopPage = () => {
     onSuccess: () => navigate('/shops'),
   });
   const user = getAuthUser();
+  // TODO: We should probably have a proper auth guard
+  if (user === null) {
+    navigate('/login');
+    return null;
+  }
 
   const handleSubmit: SubmitHandler<CreateShopFormData> = ({
     name,
@@ -23,7 +28,7 @@ export const NewShopPage = () => {
     mainLocationDescription,
   }) => {
     if (user === null) {
-      // Ideally, we would open a modal here, but we don't have any modals yet
+      // Ideally, this should never happen
       return;
     }
     const shopRecord: ShopRecord = {
