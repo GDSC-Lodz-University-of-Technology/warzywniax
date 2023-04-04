@@ -88,8 +88,14 @@ you have installed everything correctly open your terminal git-bash and run the 
 
 ### Running project
 
-To run this project locally make sure you are in root directory of **warzywniax** repository. Then
-you need to start Firebase emulators first:
+To run this project locally make sure you are in root directory of **warzywniax** repository, and you have installed all
+dependencies:
+
+```
+npm i
+```
+
+Then you need to start Firebase emulators first:
 
 ```
 npm run firebase:start:emulators

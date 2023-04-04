@@ -1,7 +1,7 @@
 {
   "name": "warzywniax",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "postinstall": "git config core.hooksPath ./git-hooks && npm run git:stop-tracking-db-seed",
