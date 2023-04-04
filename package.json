@@ -13,7 +13,7 @@
     "lint:ts:watch": "esw . --watch --cache --ext .ts --ext .tsx ",
     "prettyprint": "prettier --check .",
     "prettyprint:fix": "prettier --write .",
-    "firebase:run:emulator": "cd firebase && firebase emulators:start --project=warzywniax --import=./seed --export-on-exit",
+    "firebase:start:emulators": "cd firebase && firebase emulators:start --project=warzywniax --import=./seed --export-on-exit",
     "firebase:deploy": "cd firebase && firebase deploy --only storage,firestore:rules,firestore:indexes",
     "firebase:deploy:storage-rules": "cd firebase && firebase deploy --only storage",
     "firebase:deploy:firestore-rules": "cd firebase && firebase deploy --only firestore:rules",
