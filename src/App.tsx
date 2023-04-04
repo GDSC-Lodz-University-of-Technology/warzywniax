@@ -45,6 +45,22 @@ export function App() {
             Register
           </Link>
         </li>
+        <li>
+          <Link
+            component={RouterLink}
+            to='/dashboard'
+          >
+            Dashboard
+          </Link>
+        </li>
+        <li>
+          <Link
+            component={RouterLink}
+            to='/shops/new'
+          >
+            Create new shop
+          </Link>
+        </li>
       </ul>
     </nav>
   );

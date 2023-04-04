@@ -1,5 +1,7 @@
 import * as authEN from './en/auth.json';
 import * as authPL from './pl/auth.json';
+import * as dashboardEN from './en/dashboard.json';
+import * as dashboardPL from './pl/dashboard.json';
 import * as formsEN from './en/forms.json';
 import * as formsPL from './pl/forms.json';
 import * as navbarEN from './en/navbar.json';
@@ -17,6 +19,7 @@ const resources = {
   en: {
     components: {
       auth: authEN,
+      dashboard: dashboardEN,
       forms: formsEN,
       navbar: navbarEN,
       offers: offersEN,
@@ -27,6 +30,7 @@ const resources = {
   pl: {
     components: {
       auth: authPL,
+      dashboard: dashboardPL,
       forms: formsPL,
       navbar: navbarPL,
       offers: offersPL,
@@ -34,7 +38,7 @@ const resources = {
       shops: shopsPL,
     },
   },
-};
+} as const;
 
 void i18n.use(initReactI18next).init({
   defaultNS: 'components',
