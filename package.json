@@ -19,8 +19,8 @@
     "firebase:deploy:firestore-rules": "cd firebase && firebase deploy --only firestore:rules",
     "firebase:deploy:firesotre-indexes": "cd firebase && firebase deploy --only firestore:indexes",
     "git:stop-tracking-db-seed": "git update-index --assume-unchanged firebase/seed/auth_export/accounts.json firebase/seed/auth_export/config.json firebase/seed/firebase-export-metadata.json firebase/seed/firestore_export/all_namespaces/all_kinds/all_namespaces_all_kinds.export_metadata firebase/seed/firestore_export/all_namespaces/all_kinds/output-0 firebase/seed/firestore_export/firestore_export.overall_export_metadata firebase/seed/storage_export/buckets.json",
-    "test:integration": "jest /test/integration --passWithNoTests --setupFilesAfterEnv ./test/integration/integration-setup.ts",
-    "test:integration:watch": "jest /test/integration --passWithNoTests --setupFilesAfterEnv ./test/integration/integration-setup.ts --watch"
+    "test:integration": "jest /test/integration --testEnvironment=node --passWithNoTests --setupFilesAfterEnv ./test/integration/integration-setup.ts",
+    "test:integration:watch": "jest /test/integration --testEnvironment=node --passWithNoTests --setupFilesAfterEnv ./test/integration/integration-setup.ts --watch"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
